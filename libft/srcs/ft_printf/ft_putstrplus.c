@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   ft_putstrplus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 10:27:52 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/06/03 13:24:32 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/06/03 13:24:33 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "ft_printf.h"
 
-# include "../libft/includes/libft.h"
-# include <stdlib.h>
-
-typedef struct	s_rd
+void	ft_putstrplus(char *s, t_prin *prin)
 {
-	char		**line;
-	struct s_rd	*next;
+	int	i;
 
-}				t_rd;
-
-t_rd	*ft_read(void);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+	prin->ret += i;
+}

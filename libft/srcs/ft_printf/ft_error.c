@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 10:27:52 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/06/03 13:23:32 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/06/03 13:23:33 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "ft_printf.h"
 
-# include "../libft/includes/libft.h"
-# include <stdlib.h>
-
-typedef struct	s_rd
+void	ft_free_prin(t_prin *prin)
 {
-	char		**line;
-	struct s_rd	*next;
+	free(prin->output);
+	free(prin->form);
+	free(prin);
+}
 
-}				t_rd;
-
-t_rd	*ft_read(void);
-
-#endif
+void	ft_error(t_prin *prin)
+{
+	va_end(prin->ap);
+	ft_free_prin(prin);
+	ft_putstr("error\n");
+	exit(0);
+}

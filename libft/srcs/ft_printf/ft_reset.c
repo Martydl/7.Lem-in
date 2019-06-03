@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   ft_reset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 10:27:52 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/06/03 13:24:39 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/06/03 13:24:50 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "ft_printf.h"
 
-# include "../libft/includes/libft.h"
-# include <stdlib.h>
-
-typedef struct	s_rd
+int		ft_reset(t_prin *prin)
 {
-	char		**line;
-	struct s_rd	*next;
-
-}				t_rd;
-
-t_rd	*ft_read(void);
-
-#endif
+	prin->flags = 0;
+	prin->preci = -1;
+	prin->field = 0;
+	prin->spac = 0;
+	prin->hash = 0;
+	prin->zero = 0;
+	prin->min = 0;
+	prin->plus = 0;
+	prin->length = 0;
+	return (1);
+}

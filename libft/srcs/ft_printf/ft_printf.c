@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 11:22:06 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/06/03 13:24:26 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/06/03 13:24:26 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "ft_printf.h"
 
-t_rd	*ft_read(void)
+int		ft_printf(const char *format, ...)
 {
-	char	str[1];
-	int		ret;
-	t_rd	*beg;
-	t_rd	*rd;
+	t_prin	*prin;
+	int		retu;
 
-	beg = NULL;
-	rd = beg;
-	while ((ret = read(0, str, 1)) > 0)
-	{
-		if (ret == -1)
-			return (NULL);
-		if (!rd && !(rd = (t_rd*)(malloc(sizeof(t_rd)))))
-			return (NULL);
-		else if (str[0] != '\n')
-			rd->line = ft_strjfree(rd->line, str);
-		else
-		{
-			if (ft_verif())
-				break ;
-			rd = rd->next;
-		}
-	}
+	if (!(prin = (t_prin *)malloc(sizeof(t_prin))))
+		return (0);
+	va_start(prin->ap, format);
+	prin->z = 0;
+	prin->ret = 0;
+	prin->form = ft_strdup((char *)format);
+	if (ft_parse(prin) != 1)
+		ft_error(prin);
+	ft_putstrplus(prin->output, prin);
+	va_end(prin->ap);
+	retu = prin->ret;
+	ft_free_prin(prin);
+	return (retu);
 }
