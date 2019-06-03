@@ -6,34 +6,38 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 11:22:06 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:25:42 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
+int		ft_check_line(char *str)
+{
+	if (ft_strlen(str) && ft_str_is_alpha(str))
+		return (1);
+	return (0);
+}
+
 t_rd	*ft_read(void)
 {
-	char	str[1];
-	int		ret;
-	t_rd	*beg;
+	char	*str;
 	t_rd	*rd;
 
-	beg = NULL;
-	rd = beg;
-	while ((ret = read(0, str, 1)) > 0)
+	rd = NULL;
+	if (get_next_line(0, &str))
 	{
-		if (ret == -1)
-			return (NULL);
-		if (!rd && !(rd = (t_rd*)(malloc(sizeof(t_rd)))))
-			return (NULL);
-		else if (str[0] != '\n')
-			rd->line = ft_strjfree(rd->line, str);
-		else
+		if (ft_check_line(str))
 		{
-			if (ft_verif())
-				break ;
-			rd = rd->next;
+			if (!(rd = (t_rd*)malloc(sizeof(t_rd))))
+				return (NULL);
+			rd->line = str;
+			rd->next = ft_read();
 		}
+		else
+			free(str);
 	}
+	else
+		free(str);
+	return (rd);
 }

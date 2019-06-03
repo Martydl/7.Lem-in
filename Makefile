@@ -36,7 +36,7 @@ $(LIB):
 	@make -j -sC $(LIB_DIR)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) libft/libft.a -o $(PS)
+	@$(CC) $(OBJS) $(LIB) -o $(NAME)
 	@echo lem-in OK
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INCS)

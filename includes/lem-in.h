@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 10:27:52 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/03 15:00:29 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct	s_rd
 {
-	char		**line;
+	char		*line;
 	struct s_rd	*next;
 
 }				t_rd;
