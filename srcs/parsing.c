@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/11 14:16:05 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/11 16:51:33 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,90 @@ t_rm	*ft_getroom(t_rd **rd)
 	}
 }
 
-int		**ft_pipe(t_rd **rd)
+int		ft_nbroom(t_rm *room)
 {
+	int	i;
 
+	i = 0;
+	while (room)
+	{
+		room = room->next;
+		i++;
+	}
+	return (i);
+}
+
+int		ft_getpos(t_rm *room, char *name)
+{
+	int		i;
+
+	i = 0;
+	while (room && ft_strcmp(room->data[0], name))
+	{
+		room = room->next;
+		i++;
+	}
+	return (i);
+}
+
+int		**ft_initmatrix(t_rm *room)
+{
+	int	**matrix;
+	int	nbroom;
+	int	i;
+	int	j;
+
+	nbroom = ft_nbroom(room);
+	if (!(matrix = (int**)malloc(sizeof(int) * nbroom)))
+		return (0);
+	i = -1;
+	while (++i < nbroom)
+	{
+		if (!(matrix[i] = (int*)malloc(sizeof(int) * nbroom)))
+			return (NULL);
+		j = -1;
+		while (++j < nbroom)
+			matrix[i][j] = 0;
+	}
+	return (matrix);
+}
+
+void	ft_fill(int ***matrix, t_rd **rd, t_rm *room)
+{
+	char	**name;
+	int		a;
+	int		b;
+
+	name = ft_strsplit((*rd)->line, '-');
+	a = ft_getpos(room, name[0]);
+	free(name[0]);
+	b = ft_getpos(room, name[1]);
+	free(name[1]);
+	free(name);
+	if (*matrix[a][b] == 0)
+	{
+		*matrix[a][a]++;
+		*matrix[b][b]++;
+	}
+	*matrix[a][b] = -1;
+	*matrix[b][a] = -1;
+}
+
+int		**ft_pipe(t_rd **rd, t_rm *room)
+{
+	int		**matrix;
+	int		i;
+
+	matrix = ft_initmatrix(room);
+	while (*rd)
+	{
+		if (rd_ispipe())
+			ft_fill(&matrix, rd, room);
+		else if (rd_iscom() || rd_iscmd())
+			ft_next(rd);
+		else
+			break ;
+	}
+	ft_isenough();
+	return (matrix);
 }
