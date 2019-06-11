@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/11 12:26:07 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:16:05 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ t_rd	*ft_read(void)
 	return (rd);
 }
 
+void	ft_next(t_rd **rd)
+{
+	t_rd	*tmp;
+
+	tmp = (*rd);
+	(*rd) = ((*rd)->next);
+	free(tmp);
+}
+
 int		ft_getants(t_rd **rd)
 {
 	int		ants;
@@ -52,17 +61,11 @@ int		ft_getants(t_rd **rd)
 		if (rd_isstart() || rd_isend())
 			ft_error();
 		else if (rd_iscom() || rd_iscmd())
-		{
-			tmp = (*rd);
-			(*rd) = (*rd)->next;
-			free(tmp);
-		}
+			ft_next(rd);
 		else if (ft_isint((*rd)->line))
 		{
 			ants = ft_atoi((*rd)->line);
-			tmp = (*rd);
-			(*rd) = (*rd)->next;
-			free(tmp);
+			ft_next(rd);
 			return (ants);
 		}
 		else
@@ -74,67 +77,30 @@ int		ft_getants(t_rd **rd)
 t_rm	*ft_getroom(t_rd **rd)
 {
 	t_rd	*tmp;
+	t_rm	*room;
+	t_rm	*ret;
 
+	ret = room;
 	while ((*rd))
 	{
 		if (rd_isstart() || rd_isend())
 		{}
 		else if (rd_iscom() || rd_iscmd())
-		{
-			tmp = rd;
-			rd = rd->next;
-			free(tmp);
-		}
+			ft_next(rd);
 		else if (rd_isroom())
 		{
-			(*room)->data = ft_strsplit(rd->line, ' ');
-			tmp = rd;
-			rd = rd->next;
-			free(tmp);
+			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
+				return (NULL);
+			room->data = ft_strsplit((*rd)->line, ' ');
+			room = room->next;
+			ft_next(rd);
 		}
 		else
 			ft_error();
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*void	ft_sep(t_rd **rd, int *ants, t_rm **room, matrix)
+int		**ft_pipe(t_rd **rd)
 {
-	t_rd	*tmp;
 
-	while((*rd))
-	{
-
-	}
-	ft_enough();
 }
-
-	while ((*rd) && (rd_iscom() || rd_iscmd()))
-	{
-		tmp = (*rd);
-		(*rd) = (*rd)->next;
-		free(tmp);
-	}
-	if (ft_isint((*rd)->line))
-		*ants = ft_atoi((*rd)->line);
-	while ((*rd))
-	{
-		if ()
-			;
-		else
-			break ;
-	}*/
