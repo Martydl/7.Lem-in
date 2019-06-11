@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:11:12 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 11:35:11 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/11 11:11:38 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*ft_line(char **str, char *line, char *tmp, int fd)
 		if (!(line = ft_strndup(str[fd], i)))
 			return (NULL);
 		tmp = str[fd];
-		if (!(str[fd] = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i)))
-			return (NULL);
+		str[fd] = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i - 1);
 		free(tmp);
 		return (line);
 	}

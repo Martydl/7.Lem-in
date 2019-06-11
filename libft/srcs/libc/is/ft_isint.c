@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 10:32:50 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/11 11:08:05 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/06/11 11:17:24 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/06/11 11:22:03 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+int		ft_check_len(char *str)
 {
-	char	*s2;
-	size_t	i;
+	int	i;
+	int	count;
 
-	if (!s || !len)
-		return (NULL);
-	if (!(s2 = (char*)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	i = -1;
-	while (++i < len)
-		s2[i] = s[start + i];
-	s2[i] = '\0';
-	return (s2);
+	i = 0;
+	count = 0;
+	while (str[i] == '+' || str[i] == '-' || str[i] == '0')
+		i++;
+	while (str[i++])
+		count++;
+	return (count > 10 ? 0 : 1);
+}
+
+int		ft_isint(char *str)
+{
+	if (!ft_str_is_numeric(str[0] == '-' || str[0] == '+' ? str + 1 : str))
+		return (0);
+	if (!ft_check_len(str))
+		return (0);
+	if (ft_atoi(str) != ft_atol(str))
+		return (0);
+	return (1);
 }

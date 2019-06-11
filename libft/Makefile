@@ -16,6 +16,7 @@ LIB_SRCS_NAME	=	conv/ft_atoi.c \
 					is/ft_iscntrl.c \
 					is/ft_isdigit.c \
 					is/ft_isgraph.c \
+					is/ft_isint.c \
 					is/ft_islower.c \
 					is/ft_isprint.c \
 					is/ft_isspace.c \

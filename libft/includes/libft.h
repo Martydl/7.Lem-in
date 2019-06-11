@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 18:52:07 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:51:02 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/06/11 11:21:09 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				ft_isblank(int c);
 int				ft_iscntrl(int c);
 int				ft_isdigit(int c);
 int				ft_isgraph(int c);
+int				ft_isint(char *str);
 int				ft_islower(int c);
 int				ft_isprint(int c);
 int				ft_isspace(int c);
