@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 18:52:07 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/11 11:21:09 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:13:25 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			ft_putnbr(int n);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putstr(char const *s);
 void			ft_bzero(void *s, size_t n);
+int				ft_findpattern(char *pattern, char *str, char sep);
 char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strchr(const char *s, int c);
 void			ft_strclr(char *s);

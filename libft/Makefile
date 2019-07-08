@@ -54,6 +54,7 @@ LIB_SRCS_NAME	=	conv/ft_atoi.c \
 					print/ft_putstr.c \
 \
 					str/ft_bzero.c \
+					str/ft_findpattern.c \
 					str/ft_strcat.c \
 					str/ft_strchr.c \
 					str/ft_strclr.c \

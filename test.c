@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 10:32:50 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/07/08 14:03:48 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/07/08 13:07:49 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/07/08 13:47:52 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "stdio.h"
+#include "includes/lem-in.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+/*void	ft_test(char **str)
 {
-	char	*s2;
-	size_t	i;
+	*str += 1;
+}*/
 
-	dprintf(1, "b");
-	if (!s || !len)
-		return (NULL);
-	if (!(s2 = (char*)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	i = -1;
-	while (++i < len)
-		s2[i] = s[start + i];
-	s2[i] = '\0';
-	return (s2);
+int		main(int ac, char **av)
+{
+	//char *str;
+
+	ft_printf("%s\n%s\n%c/\n\n", av[1],av[2], av[3][0]);
+	ft_putnbr(ft_findpattern(av[1], av[2], av[3][0]));
+	//str = ft_strdup("abcdef");
+	//ft_putendl(str);
+	//ft_test(&str);
+	//ft_putendl(str);
+	(void)ac;
+	(void)av;
+	return (0);
 }
