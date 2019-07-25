@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/11 16:51:33 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/07/25 18:50:58 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int		ft_check_line(char *str)
 {
-	if (ft_strlen(str) && ft_str_is_alpha(str))
-		return (1);
-	return (0);
+	(void)str;
+	return (1);
 }
 
 t_rd	*ft_read(void)
@@ -42,7 +41,7 @@ t_rd	*ft_read(void)
 	return (rd);
 }
 
-void	ft_next(t_rd **rd)
+/*void	ft_next(t_rd **rd)
 {
 	t_rd	*tmp;
 
@@ -186,4 +185,4 @@ int		**ft_pipe(t_rd **rd, t_rm *room)
 	}
 	ft_isenough();
 	return (matrix);
-}
+}*/

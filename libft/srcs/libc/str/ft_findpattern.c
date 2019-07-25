@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 11:15:09 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/07/25 18:19:15 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/07/25 18:23:50 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static int	number(char **str, char sep)
 	free(tmp);
 	return (i < 0 ? 0 : 1);
 }
-
-//ft_printf("i = %d\nchar :%c\nstr:%s\n", i, pattern[i + 1], str);
 
 int			ft_findpattern(char *pattern, char *str, char sep)
 {
