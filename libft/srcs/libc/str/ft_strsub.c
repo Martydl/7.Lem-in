@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:32:50 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/07/08 14:03:48 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:20:05 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	char	*s2;
 	size_t	i;
 
-	dprintf(1, "b");
 	if (!s || !len)
 		return (NULL);
 	if (!(s2 = (char*)malloc(sizeof(char) * len + 1)))
