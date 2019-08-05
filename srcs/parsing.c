@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/07/25 18:50:58 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:49:50 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_rd	*ft_read(void)
 	return (rd);
 }
 
-/*void	ft_next(t_rd **rd)
+void	ft_next(t_rd **rd)
 {
 	t_rd	*tmp;
 
@@ -53,13 +53,12 @@ t_rd	*ft_read(void)
 int		ft_getants(t_rd **rd)
 {
 	int		ants;
-	t_rd	*tmp;
 
 	while ((*rd))
 	{
-		if (rd_isstart() || rd_isend())
+		if (rd_isstart((*rd)->line) || rd_isend((*rd)->line))
 			ft_error();
-		else if (rd_iscom() || rd_iscmd())
+		else if (rd_iscom((*rd)->line))
 			ft_next(rd);
 		else if (ft_isint((*rd)->line))
 		{
@@ -70,23 +69,23 @@ int		ft_getants(t_rd **rd)
 		else
 			ft_error();
 	}
-	return (NULL);
+	return (0);
 }
 
 t_rm	*ft_getroom(t_rd **rd)
 {
-	t_rd	*tmp;
 	t_rm	*room;
 	t_rm	*ret;
 
+	room = NULL;
 	ret = room;
 	while ((*rd))
 	{
-		if (rd_isstart() || rd_isend())
+		/*if (rd_isstart((*rd)->line) || rd_isend((*rd)->line))
 		{}
-		else if (rd_iscom() || rd_iscmd())
+		else */if (rd_iscom((*rd)->line))
 			ft_next(rd);
-		else if (rd_isroom())
+		else if (rd_isroom((*rd)->line) && rm_check())
 		{
 			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);
@@ -94,9 +93,12 @@ t_rm	*ft_getroom(t_rd **rd)
 			room = room->next;
 			ft_next(rd);
 		}
+		else if (rd_ispipe((*rd)->line))
+			break ;
 		else
 			ft_error();
 	}
+	return (ret);
 }
 
 int		ft_nbroom(t_rm *room)
@@ -133,7 +135,7 @@ int		**ft_initmatrix(t_rm *room)
 	int	j;
 
 	nbroom = ft_nbroom(room);
-	if (!(matrix = (int**)malloc(sizeof(int) * nbroom)))
+	if (!(matrix = (int**)malloc(sizeof(int*) * nbroom)))
 		return (0);
 	i = -1;
 	while (++i < nbroom)
@@ -161,8 +163,8 @@ void	ft_fill(int ***matrix, t_rd **rd, t_rm *room)
 	free(name);
 	if (*matrix[a][b] == 0)
 	{
-		*matrix[a][a]++;
-		*matrix[b][b]++;
+		*matrix[a][a] += 1;
+		*matrix[b][b] += 1;
 	}
 	*matrix[a][b] = -1;
 	*matrix[b][a] = -1;
@@ -171,18 +173,44 @@ void	ft_fill(int ***matrix, t_rd **rd, t_rm *room)
 int		**ft_pipe(t_rd **rd, t_rm *room)
 {
 	int		**matrix;
-	int		i;
 
 	matrix = ft_initmatrix(room);
 	while (*rd)
 	{
-		if (rd_ispipe())
+		if (rd_ispipe((*rd)->line))
+		{
 			ft_fill(&matrix, rd, room);
-		else if (rd_iscom() || rd_iscmd())
+			ft_next(rd);
+		}
+		else if (rd_iscom((*rd)->line))
 			ft_next(rd);
 		else
 			break ;
 	}
-	ft_isenough();
+	/*if (!ft_isenough())
+		ft_error();*/
 	return (matrix);
-}*/
+}
+
+void	ft_displaymatrix(int **matrix, t_rm *room)
+{
+	t_rm	*cp;
+	int		i;
+	int		j;
+
+	ft_printf("%5s", "");
+	while (room->data)
+	{
+		ft_printf("%5s", room->data);
+		room = room->next;
+	}
+	i = -1;
+	while (matrix[++i])
+	{
+		ft_printf("\n%5s", cp->data);
+		cp = cp->next;
+		j = -1;
+		while (matrix[i][++j])
+			ft_printf("%5d", matrix[i][j]);
+	}
+}

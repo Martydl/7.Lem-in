@@ -3,6 +3,7 @@ NAME = lem-in
 # Sources
 
 SRCS_NAME =	parsing.c \
+			tools.c \
 			main.c
 
 INCS_NAME	=	lem-in.h

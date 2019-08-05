@@ -1,48 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/05 16:50:53 by mde-laga         ###   ########.fr       */
+/*   Created: 2019/08/05 16:20:17 by mde-laga          #+#    #+#             */
+/*   Updated: 2019/08/05 16:33:26 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-void	ft_free_list(t_rd *beg)
+int		rd_isstart(char *str)
 {
-	if (beg)
-	{
-		if (beg->next)
-			ft_free_list(beg->next);
-		free(beg->line);
-		free(beg);
-	}
+	return (ft_strcmp("##start", str) ? 0 : 1);
 }
 
-void	ft_display_list(t_rd *rd)
+int		rd_isend(char *str)
 {
-	while (rd)
-	{
-		ft_putendl(rd->line);
-		rd = rd->next;
-	}
+	return (ft_strcmp("##end", str) ? 0 : 1);
 }
 
-int		main(int ac, char **av)
+int		rd_iscom(char *str)
 {
-	t_rd	*rd;
-	t_rm	*room;
-	int		**matrix;
+	return (str[0] == '#' ? 1 : 0);
+}
 
-	(void)ac;
-	(void)av;
-	rd = ft_read();
-	ft_display_list(rd);
-	room = ft_getroom(&rd);
-	matrix = ft_pipe(&rd, room);
-	ft_free_list(rd);
+int		rd_isroom(char *str)
+{
+	return (ft_findpattern("%s%d%d", str, ' ') ? 1 : 0);
+}
+
+int		rd_ispipe(char *str)
+{
+	return (ft_findpattern("%d%d", str, '-') ? 1 : 0);
 }
