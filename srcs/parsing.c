@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/05 18:14:14 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/05 18:16:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_rm	*ft_getroom(t_rd **rd)
 		{
 			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);
-			room->data = ft_strsplit((*rd)->data, ' ');
+			room->data = ft_strsplit((*rd)->data, ' '); // potentiellement broken ici
 			if (!ret)
 			{
 				ft_putendl("ret init");
