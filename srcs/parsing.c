@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/05 16:49:50 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/05 18:14:14 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_rd	*ft_read(void)
 		{
 			if (!(rd = (t_rd*)malloc(sizeof(t_rd))))
 				return (NULL);
-			rd->line = str;
+			rd->data = str;
 			rd->next = ft_read();
 		}
 		else
@@ -56,18 +56,18 @@ int		ft_getants(t_rd **rd)
 
 	while ((*rd))
 	{
-		if (rd_isstart((*rd)->line) || rd_isend((*rd)->line))
-			ft_error();
-		else if (rd_iscom((*rd)->line))
+		if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
+			ft_err();
+		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
-		else if (ft_isint((*rd)->line))
+		else if (ft_isint((*rd)->data))
 		{
-			ants = ft_atoi((*rd)->line);
+			ants = ft_atoi((*rd)->data);
 			ft_next(rd);
 			return (ants);
 		}
 		else
-			ft_error();
+			ft_err();
 	}
 	return (0);
 }
@@ -77,27 +77,52 @@ t_rm	*ft_getroom(t_rd **rd)
 	t_rm	*room;
 	t_rm	*ret;
 
-	room = NULL;
-	ret = room;
+	ret = NULL;
 	while ((*rd))
 	{
-		/*if (rd_isstart((*rd)->line) || rd_isend((*rd)->line))
+		/*if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
 		{}
-		else */if (rd_iscom((*rd)->line))
+		else */if (rd_iscom((*rd)->data))
+		{
 			ft_next(rd);
-		else if (rd_isroom((*rd)->line) && rm_check())
+			ft_putendl("next");
+		}
+		else if (rd_isroom((*rd)->data))
 		{
 			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);
-			room->data = ft_strsplit((*rd)->line, ' ');
+			room->data = ft_strsplit((*rd)->data, ' ');
+			if (!ret)
+			{
+				ft_putendl("ret init");
+				ret = room;
+			}
+			/*if (!rm_check(ret, room))
+			{
+				ft_putendl("x");
+				ft_err();
+			}*/
+			//dprintf(1, "%s\n%s\n%s\n", room->data[0], room->data[1], room->data[2]);
+			//ft_putendl(room->data[0]);
 			room = room->next;
 			ft_next(rd);
 		}
-		else if (rd_ispipe((*rd)->line))
+		else if (rd_ispipe((*rd)->data))
+		{
+			ft_putendl("break");
 			break ;
+		}
 		else
-			ft_error();
+			ft_err();
 	}
+	dprintf(1, "A\n");
+	while (ret && ret->data)
+	{
+		dprintf(1, "B\n");
+		ft_putendl(ret->data[0]);
+		ret = ret->next;
+	}
+	//ft_display_rm(ret);
 	return (ret);
 }
 
@@ -155,7 +180,7 @@ void	ft_fill(int ***matrix, t_rd **rd, t_rm *room)
 	int		a;
 	int		b;
 
-	name = ft_strsplit((*rd)->line, '-');
+	name = ft_strsplit((*rd)->data, '-');
 	a = ft_getpos(room, name[0]);
 	free(name[0]);
 	b = ft_getpos(room, name[1]);
@@ -177,12 +202,12 @@ int		**ft_pipe(t_rd **rd, t_rm *room)
 	matrix = ft_initmatrix(room);
 	while (*rd)
 	{
-		if (rd_ispipe((*rd)->line))
+		if (rd_ispipe((*rd)->data))
 		{
 			ft_fill(&matrix, rd, room);
 			ft_next(rd);
 		}
-		else if (rd_iscom((*rd)->line))
+		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
 		else
 			break ;

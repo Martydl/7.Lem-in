@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/05 16:51:24 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/05 17:45:14 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include "../libft/includes/libft.h"
 # include <stdlib.h>
 
+# include "stdio.h"
+
 typedef struct	s_rd
 {
-	char		*line;
+	char		*data;
 	struct s_rd	*next;
 
 }				t_rd;
@@ -39,5 +41,10 @@ int		rd_isend(char *str);
 int		rd_iscom(char *str);
 int		rd_isroom(char *str);
 int		rd_ispipe(char *str);
+int		rm_check(t_rm *beg, t_rm *room);
+
+void	ft_display_rd(t_rd *rd);
+void	ft_display_rm(t_rm *rm);
+void	ft_err();
 
 #endif
