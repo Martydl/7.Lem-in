@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/09 15:58:35 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:03:59 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	ft_free_matrix(int **matrix)
 {
 	int i;
 
-	i = -1;
-	while (matrix[++i])
+	i = sizeof(matrix);
+	while (--i >= 0)
 		free(matrix[i]);
 	free(matrix);
 }
