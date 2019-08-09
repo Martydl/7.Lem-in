@@ -1,0 +1,7 @@
+- fix make error w/ ft_err conflict (redo Makefiles)
+
+- add start/end part
+
+- isenough function
+
+- full error function
