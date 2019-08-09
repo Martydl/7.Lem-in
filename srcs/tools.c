@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 16:20:17 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/05 17:55:51 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/09 14:59:32 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,23 @@ int		rd_ispipe(char *str)
 	return (ft_findpattern("%d%d", str, '-') ? 1 : 0);
 }
 
-int		rm_check(t_rm *beg, t_rm *room)
+int		rm_check(t_rm *room)
 {
-	while (beg && beg->data)
+	t_rm *beg;
+
+	if (!room)
+		return (0);
+	beg = room;
+	while (beg)
 	{
-		if (beg->next->data && !ft_strcmp(beg->data[0], room->data[0]))
-			return (0);
-		else
-			beg = beg->next;
+		room = beg->next;
+		while (room)
+		{
+			if (!ft_strcmp(beg->data[0], room->data[0]))
+				return (0);
+			room = room->next;
+		}
+		beg = beg->next;
 	}
 	return (1);
 }
