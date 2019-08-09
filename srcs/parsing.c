@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/09 15:54:40 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:19:26 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,17 +155,17 @@ void	ft_fill(int **matrix, t_rd *rd, t_rm *room)
 
 	name = ft_strsplit(rd->data, '-');
 	a = ft_getpos(room, name[0]);
-	free(name[0]);
 	b = ft_getpos(room, name[1]);
+	free(name[0]);
 	free(name[1]);
 	free(name);
 	if (matrix[a][b] == 0)
 	{
 		matrix[a][a] += 1;
 		matrix[b][b] += 1;
+		matrix[a][b] = -1;
+		matrix[b][a] = -1;
 	}
-	matrix[a][b] = -1;
-	matrix[b][a] = -1;
 }
 
 int		**ft_pipe(t_rd **rd, t_rm *room)
