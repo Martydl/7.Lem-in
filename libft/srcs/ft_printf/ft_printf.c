@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:24:26 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:24:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:22:39 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_printf(const char *format, ...)
 	prin->ret = 0;
 	prin->form = ft_strdup((char *)format);
 	if (ft_parse(prin) != 1)
-		ft_error(prin);
+		ft_printf_error(prin);
 	ft_putstrplus(prin->output, prin);
 	va_end(prin->ap);
 	retu = prin->ret;

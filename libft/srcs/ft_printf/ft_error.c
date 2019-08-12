@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_printf_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@ void	ft_free_prin(t_prin *prin)
 	free(prin);
 }
 
-void	ft_error(t_prin *prin)
+void	ft_printf_error(t_prin *prin)
 {
 	va_end(prin->ap);
 	ft_free_prin(prin);

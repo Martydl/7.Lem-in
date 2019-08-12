@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/09 16:19:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:18:46 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-void	ft_err()
+void	ft_error()
 {
 	ft_putendl("error");
 	exit(-1);
@@ -85,7 +85,7 @@ void	ft_display_matrix(int **matrix, t_rm *room)
 	ft_printf("     ");
 	while (room && room->data)
 	{
-		ft_printf("%5s", room->data[0]);
+		ft_printf("%k%5s", room->data[0]);
 		room = room->next;
 	}
 	i = -1;
@@ -111,7 +111,7 @@ int		main(int ac, char **av)
 	rd = ft_read();
 	//ft_display_rd(rd);
 	//ft_putchar('\n');
-	room = ft_getroom(&rd);
+	room = ft_getroom(&rd, 0);
 	//ft_display_rm(room);
 	//ft_printf("\n%d\n", rm_check(room));
 	matrix = ft_pipe(&rd, room);

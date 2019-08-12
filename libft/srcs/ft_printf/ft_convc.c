@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:22:21 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:21:07 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 12:17:27 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_convc(t_prin *prin)
 	if (prin->field)
 		size += prin->field--;
 	if (!(ret = ft_strnew(size)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	i = 0;
 	if (!prin->min)
 		while (--prin->field >= 0)

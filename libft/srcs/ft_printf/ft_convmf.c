@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:22:25 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:23:06 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 12:17:27 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char			*ft_prefix(t_prin *prin, char *str, int mant)
 	else if (!prin->min)
 		prin->field = 0;
 	if (!(pre = ft_strnew(size)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	i = 0;
 	if (!prin->min)
 		while (--prin->field >= 0)
@@ -57,7 +57,7 @@ static char			*ft_suffix(t_prin *prin, char *ret)
 	i = 0;
 	len = prin->field - ft_strlen(ret);
 	if (!(suf = ft_strnew(len)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	while (i < len)
 		suf[i++] = ' ';
 	ret = ft_strjfree(ret, suf);
@@ -69,7 +69,7 @@ static void			ft_inf_nan(t_prin *prin, int mant)
 	char *ret;
 
 	if (!(ret = ft_strnew(0)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	ret = ft_strjfree(ret, ft_strdup(mant == 1 ? "INF" : "NAN"));
 	ret = ft_strjfree(ft_prefix(prin, ret, mant), ret);
 	if (prin->min && prin->field > (int)ft_strlen(ret))
@@ -86,7 +86,7 @@ void				ft_convmf(t_prin *prin)
 
 	prin->preci == -1 ? prin->preci = 6 : 0;
 	if (!(fl = (t_fl *)malloc(sizeof(t_fl))))
-		ft_error(prin);
+		ft_printf_error(prin);
 	value = ft_getnb(prin);
 	neg = (value < 0 && (value *= -1) ? 1 : 0);
 	ft_separator(fl, value);

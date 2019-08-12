@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:26:14 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:23:39 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 12:17:27 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char		*ft_prefix(t_prin *prin, char *str, int neg)
 	else if (!prin->min)
 		prin->field = 0;
 	if (!(pre = ft_strnew(size)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	i = 0;
 	if (!prin->min && !prin->zero)
 		while (--prin->field >= 0)
@@ -72,11 +72,11 @@ static char		*ft_suffix(t_prin *prin, char *ret)
 	i = 0;
 	len = prin->field - ft_strlen(ret);
 	if (!(suf = ft_strnew(len)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	while (i < len)
 		suf[i++] = ' ';
 	if (!(ret = ft_strjfree(ret, suf)))
-		ft_error(prin);
+		ft_printf_error(prin);
 	return (ret);
 }
 

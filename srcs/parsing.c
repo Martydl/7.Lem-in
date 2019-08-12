@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/09 16:19:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:07:12 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_getants(t_rd **rd)
 	while ((*rd))
 	{
 		if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
-			ft_err();
+			ft_error();
 		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
 		else if (ft_isint((*rd)->data))
@@ -68,19 +68,22 @@ int		ft_getants(t_rd **rd)
 			return (ants);
 		}
 		else
-			ft_err();
+			ft_error();
 	}
 	return (0);
 }
 
-t_rm	*ft_getroom(t_rd **rd)
+t_rm	*ft_getroom(t_rd **rd, int pos)
 {
 	t_rm	*room;
 
 	room = NULL;
 	if (*rd)
 	{
-		//add start/end identification
+		if (rd_isstart((*rd)->data))
+			pos = 1;
+		else if (rd_isend((*rd)->data))
+			pos = -1;
 		while (rd_iscom((*rd)->data))
 			ft_next(rd);
 		if (rd_isroom((*rd)->data))
@@ -88,13 +91,14 @@ t_rm	*ft_getroom(t_rd **rd)
 			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);
 			room->data = ft_strsplit((*rd)->data, ' ');
+			room->pos = pos;
 			ft_next(rd);
-			room->next = ft_getroom(rd);
+			room->next = ft_getroom(rd, 0);
 		}
 		else if (rd_ispipe((*rd)->data))
 			return (NULL);
 		else
-			ft_err();
+			ft_error();
 	}
 	return (room);
 }

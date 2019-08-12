@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:24:20 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/06/03 13:24:21 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:24:52 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int			ft_counter(t_prin *prin)
 	j = 0;
 	i = 1;
 	k = 0;
-	converter = "dDiIoOuUxXfFcspbBgG%";
+	converter = "dDiIoOuUxXfFcspbBgGe%";
 	while (j == 0 && prin->form[prin->z + i] != '\0')
 	{
-		while (prin->form[prin->z + i] != converter[k] && k <= 18)
+		while (prin->form[prin->z + i] != converter[k] && k <= 19)
 			k++;
 		if (prin->form[prin->z + i] == converter[k])
 		{
@@ -66,7 +66,7 @@ static int	ft_check(t_prin *prin)
 	if (ft_stopar(prin) != -1)
 	{
 		if (!(ft_convert(prin)))
-			ft_error(prin);
+			ft_printf_error(prin);
 	}
 	else
 		return (0);

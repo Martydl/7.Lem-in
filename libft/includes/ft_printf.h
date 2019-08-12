@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:34:19 by lramard           #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:25 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:25:25 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
+
+# define RED "\x1b[31m"
+
+# define GREEN "\x1b[32m"
+
+# define BLUE "\x1b[34m"
+
+# define YELLOW "\x1b[33m"
+
+# define MAGENTA "\x1b[35m"
+
+# define CYAN "\x1b[36m"
+
+# define RESET "\x1b[0m"
 
 typedef struct		s_prin
 {
@@ -86,6 +100,7 @@ void				ft_convf(t_prin *prin);
 void				ft_convf2(t_prin *prin, t_fl *fl, int neg);
 void				ft_convg(t_prin *prin);
 void				ft_convi(t_prin *prin);
+void				ft_conve(t_prin *prin);
 void				ft_convmb(t_prin *prin);
 void				ft_convmf(t_prin *prin);
 void				ft_convmg(t_prin *prin);
@@ -97,6 +112,6 @@ void				ft_convs(t_prin *prin);
 void				ft_convu(t_prin *prin);
 void				ft_convx(t_prin *prin);
 void				ft_free_prin(t_prin *prin);
-void				ft_error(t_prin *prin);
+void				ft_printf_error(t_prin *prin);
 
 #endif

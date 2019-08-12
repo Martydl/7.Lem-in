@@ -97,6 +97,7 @@ PRINTF_SRCS_NAME =	ft_convb.c \
 					ft_convf.c \
 					ft_convg.c \
 					ft_convi.c \
+					ft_convk.c \
 					ft_convmb.c \
 					ft_convmf.c \
 					ft_convmg.c \
