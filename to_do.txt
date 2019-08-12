@@ -4,6 +4,6 @@
 
 - isenough function
 
-- full error function
+- full error function ✓︎︎︎︎︎︎︎︎
 
-- add colors to printf
+- add colors to printf ✓︎

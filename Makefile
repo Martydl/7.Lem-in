@@ -4,6 +4,8 @@ NAME = lem-in
 
 SRCS_NAME =	parsing.c \
 			tools.c \
+			ft_display_matrix.c \
+			ft_error.c \
 			main.c
 
 INCS_NAME	=	lem-in.h

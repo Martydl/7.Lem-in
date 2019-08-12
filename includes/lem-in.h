@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 14:30:10 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:20:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ typedef struct	s_rm
 	char		**data;
 	int			pos;
 	struct s_rm	*next;
+	struct s_rm	*prev;
 }				t_rm;
+
+typedef struct	s_room
+{
+	t_rm		*room;
+}				t_room;
 
 t_rd			*ft_read(void);
 t_rm			*ft_getroom(t_rd **rdm, int pos);
@@ -42,10 +48,11 @@ int				rd_isend(char *str);
 int				rd_iscom(char *str);
 int				rd_isroom(char *str);
 int				rd_ispipe(char *str);
-int				rm_check(t_rm *room);
+int				rm_check(t_rm *room, t_rd *rd);
+void			ft_free_lemin(t_rd *rd, t_rm *rm, int **matrix);
 
 void			ft_display_rd(t_rd *rd);
 void			ft_display_rm(t_rm *rm);
-void			ft_error();
+void			ft_error_lemin();
 
 #endif

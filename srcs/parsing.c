@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/10 13:07:12 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:20:08 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_getants(t_rd **rd)
 	while ((*rd))
 	{
 		if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
-			ft_error();
+			ft_error_lemin(NULL, NULL, NULL);
 		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
 		else if (ft_isint((*rd)->data))
@@ -68,7 +68,7 @@ int		ft_getants(t_rd **rd)
 			return (ants);
 		}
 		else
-			ft_error();
+			ft_error_lemin(NULL, NULL, NULL);
 	}
 	return (0);
 }
@@ -95,10 +95,8 @@ t_rm	*ft_getroom(t_rd **rd, int pos)
 			ft_next(rd);
 			room->next = ft_getroom(rd, 0);
 		}
-		else if (rd_ispipe((*rd)->data))
-			return (NULL);
 		else
-			ft_error();
+			return (NULL);
 	}
 	return (room);
 }
@@ -190,6 +188,6 @@ int		**ft_pipe(t_rd **rd, t_rm *room)
 			break ;
 	}
 	/*if (!ft_isenough())
-		ft_error();*/
+		ft_error_lemin(NULL, NULL, NULL);*/
 	return (matrix);
 }
