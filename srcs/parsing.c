@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 16:20:08 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 18:19:55 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_getants(t_rd **rd)
 	while ((*rd))
 	{
 		if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
-			ft_error_lemin(NULL, NULL, NULL);
+			ft_error_lemin(*rd, NULL, NULL);
 		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
 		else if (ft_isint((*rd)->data))
@@ -68,18 +68,22 @@ int		ft_getants(t_rd **rd)
 			return (ants);
 		}
 		else
-			ft_error_lemin(NULL, NULL, NULL);
+			ft_error_lemin(*rd, NULL, NULL);
 	}
 	return (0);
 }
 
-t_rm	*ft_getroom(t_rd **rd, int pos)
+t_rm	*ft_getroom(t_rd **rd)
 {
-	t_rm	*room;
+	t_rm	*rm;
+	int		pos;
 
-	room = NULL;
+	rm = NULL;
+	pos = 0;
 	if (*rd)
 	{
+		while (rd_iscom((*rd)->data) && !rd_isstart((*rd)->data) && !rd_isend((*rd)->data))
+			ft_next(rd);
 		if (rd_isstart((*rd)->data))
 			pos = 1;
 		else if (rd_isend((*rd)->data))
@@ -88,17 +92,17 @@ t_rm	*ft_getroom(t_rd **rd, int pos)
 			ft_next(rd);
 		if (rd_isroom((*rd)->data))
 		{
-			if (!(room = (t_rm*)malloc(sizeof(t_rm))))
+			if (!(rm = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);
-			room->data = ft_strsplit((*rd)->data, ' ');
-			room->pos = pos;
+			rm->data = ft_strsplit((*rd)->data, ' ');
+			rm->pos = pos;
 			ft_next(rd);
-			room->next = ft_getroom(rd, 0);
+			rm->next = ft_getroom(rd);
 		}
 		else
 			return (NULL);
 	}
-	return (room);
+	return (rm);
 }
 
 int		ft_nbroom(t_rm *room)
@@ -188,6 +192,6 @@ int		**ft_pipe(t_rd **rd, t_rm *room)
 			break ;
 	}
 	/*if (!ft_isenough())
-		ft_error_lemin(NULL, NULL, NULL);*/
+		ft_error_lemin(*rd, room, matrix);*/
 	return (matrix);
 }

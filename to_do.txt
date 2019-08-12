@@ -2,8 +2,10 @@
 
 - add start/end part ✓
 
-- isenough function
-
 - full error function ✓︎︎︎︎︎︎︎︎
 
 - add colors to printf ✓︎
+
+- add empty int opti to matrix
+
+- isenough function

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:58:53 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 16:12:27 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 18:00:29 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ static	void	ft_free_rd(t_rd *beg)
 		free(beg);
 	}
 }
-
-/*static	t_rm	*ft_getprev(t_rm *rm)
-{
-	while (rm->prev)
-		rm = rm->prev;
-	return (rm);
-}*/
 
 static	void	ft_free_rm(t_rm *rm)
 {
@@ -46,11 +39,11 @@ static	void	ft_free_rm(t_rm *rm)
 	}
 }
 
-static	void	ft_free_matrix(int **matrix)
+static	void	ft_free_matrix(int **matrix, t_rm *rm)
 {
 	int i;
 
-	i = sizeof(matrix);
+	i = ft_nbroom(rm);
 	while (--i >= 0)
 		free(matrix[i]);
 	free(matrix);
@@ -58,17 +51,17 @@ static	void	ft_free_matrix(int **matrix)
 
 void			ft_free_lemin(t_rd *rd, t_rm *rm, int **matrix)
 {
-	if (rd)
-		ft_free_rd(rd);
+	if (matrix)
+		ft_free_matrix(matrix, rm);
 	if (rm)
 		ft_free_rm(rm);
-	if (matrix)
-		ft_free_matrix(matrix);
+	if (rd)
+		ft_free_rd(rd);
 }
 
 void			ft_error_lemin(t_rd *rd, t_rm *rm, int **matrix)
 {
 	ft_free_lemin(rd, rm, matrix);
-	ft_putendl("Error");
+	ft_printf("%1kERROR%0k\n");
 	exit(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 16:20:51 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 18:07:37 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,9 @@ typedef struct	s_rm
 	struct s_rm	*prev;
 }				t_rm;
 
-typedef struct	s_room
-{
-	t_rm		*room;
-}				t_room;
-
 t_rd			*ft_read(void);
-t_rm			*ft_getroom(t_rd **rdm, int pos);
+t_rm			*ft_getroom(t_rd **rd);
+int				ft_getants(t_rd **rd);
 int				**ft_pipe(t_rd **rd, t_rm *room);
 int				ft_nbroom(t_rm *room);
 void			ft_display_matrix(int **matrix, t_rm *room);
