@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/10 13:18:46 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:32:22 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-void	ft_error()
+void	ft_error(void)
 {
 	ft_putendl("error");
 	exit(-1);
@@ -37,7 +37,7 @@ void	ft_free_rm(t_rm *beg)
 	{
 		if (beg->next)
 			ft_free_rm(beg->next);
-		i= -1;
+		i = -1;
 		while (beg->data[++i])
 			free(beg->data[i]);
 		free(beg->data);
