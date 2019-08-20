@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 18:20:30 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/20 17:21:57 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		main(int ac, char **av)
 
 	room = ft_getroom(&rd);
 	rm_check(room, rd);
+	room = ft_push_front(room, 1);
+	room = ft_push_front(room, -1);
 	//ft_display_rm(room);
 
 	matrix = ft_pipe(&rd, room);

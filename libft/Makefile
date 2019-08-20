@@ -2,7 +2,8 @@ NAME		= libft.a
 
 #Sources
 
-LIB_SRCS_NAME	=	conv/ft_atoi.c \
+LIB_SRCS_NAME	=	conv/ft_abs.c \
+					conv/ft_atoi.c \
 					conv/ft_atol.c \
 					conv/ft_convert_base.c \
 					conv/ft_itoa.c \

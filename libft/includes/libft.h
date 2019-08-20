@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 18:52:07 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/07/08 13:13:25 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/20 18:07:41 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_abs(int i);
 int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/16 15:25:04 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/20 17:23:17 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,27 @@ t_rm	*ft_getroom(t_rd **rd)
 		}
 		else
 			return (NULL);
+	}
+	return (rm);
+}
+
+t_rm	*ft_push_front(t_rm *rm, int pos)
+{
+	t_rm *beg;
+	t_rm *tmp;
+
+	if (!rm)
+		return (NULL);
+	beg = rm;
+	if (rm && rm->pos != pos)
+	{
+		while (rm && rm->pos != pos)
+		{
+			tmp = rm;
+			rm = rm->next;
+		}
+		tmp->next = rm->next;
+		rm ->next = beg;
 	}
 	return (rm);
 }
