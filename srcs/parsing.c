@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 18:19:55 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:25:04 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ int		ft_getants(t_rd **rd)
 	return (0);
 }
 
+int		ft_checkpos(t_rd **rd)
+{
+	int ret;
+
+	ret = 0;
+	if (rd_isstart((*rd)->data))
+		ret = 1;
+	else if (rd_isend((*rd)->data))
+		ret = -1;
+	ft_next(rd);
+	return (ret);
+}
+
 t_rm	*ft_getroom(t_rd **rd)
 {
 	t_rm	*rm;
@@ -82,14 +95,12 @@ t_rm	*ft_getroom(t_rd **rd)
 	pos = 0;
 	if (*rd)
 	{
-		while (rd_iscom((*rd)->data) && !rd_isstart((*rd)->data) && !rd_isend((*rd)->data))
-			ft_next(rd);
-		if (rd_isstart((*rd)->data))
-			pos = 1;
-		else if (rd_isend((*rd)->data))
-			pos = -1;
 		while (rd_iscom((*rd)->data))
-			ft_next(rd);
+		{
+			pos = ft_checkpos(rd);
+			if ((pos != 0))
+				break ;
+		}
 		if (rd_isroom((*rd)->data))
 		{
 			if (!(rm = (t_rm*)malloc(sizeof(t_rm))))
