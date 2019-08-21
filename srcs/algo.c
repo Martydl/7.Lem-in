@@ -6,47 +6,49 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/20 18:14:50 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 11:26:48 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-int		**ft_addtoq(int **prev, int **q, int room, int **matrix)
+void	ft_addtoq(t_bfs *bfs, int **matrix)
 {
 	int		b;
 
 	b = 0;
-	while (b)
+	while (b < bfs->nbroom)
 	{
-		while (matrix[room][b] <= 0)
-			b -= matrix[room][b];
-		if (!prev[b])
+		while (matrix[bfs->room][b] <= 0)
+			b -= matrix[bfs->room][b];
+		if (b < bfs->nbroom && !bfs->prev[b])
 		{
-			if (!(prev[b] = (int*)malloc(sizeof(int))))
+			if (!(bfs->prev[b] = (int*)malloc(sizeof(int))))
 				return (NULL);
-			*prev[b] = room;
+			*bfs->prev[b] = bfs->room;
 		}
 	}
-	return (prev);
 }
 
 int		*ft_fill_path(int **prev)
 {}
 
-int		*ft_bfs(t_rm *rm, int **matrix, int room)
+int		*ft_bfs(t_rm *rm, int **matrix)
 {
-	int		*q;
-	int		**prev;
+	t_bfs	*bfs;
 
-	if (!(q = (int*)malloc(sizeof(int) * ft_nbroom(rm))))
+	if (!(bfs = (t_bfs*)malloc(sizeof(t_bfs))))
 		return (NULL);
-	if (!(prev = (int**)malloc(sizeof(int*) * ft_nbroom(rm))))
+	bfs->room = 1;
+	bfs->nbroom = ft_nbroom(rm);
+	if (!(bfs->prev = (int**)malloc(sizeof(int*) * ft_nbroom(rm))))
 		return (NULL);
-	while (room != 0)
+	if (!(bfs->q = (int*)malloc(sizeof(int) * ft_nbroom(rm))))
+		return (NULL);
+	while (bfs->room != 0)
 	{
-		ft_addtoq(prev, &q, room, matrix);
-		room = ft_getq();
+		ft_addtoq(bfs, matrix);
+		bfs->room = ft_getq(bfs);
 	}
 }
 

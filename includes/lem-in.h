@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/20 17:20:31 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 11:20:06 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ typedef struct	s_rm
 	struct s_rm	*next;
 	struct s_rm	*prev;
 }				t_rm;
+
+typedef struct s_bfs
+{
+	int			room;
+	int			nbroom;
+	int			**prev;
+	int			*q;
+}				t_bfs;
+
 
 t_rd			*ft_read(void);
 t_rm			*ft_getroom(t_rd **rd);
