@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:00:28 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 14:14:06 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 17:20:23 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_checkpos(t_rd **rd)
 	return (ret);
 }
 
-t_rm		*ft_getroom(t_rd **rd)
+t_rm			*ft_getroom(t_rd **rd)
 {
 	t_rm	*rm;
 	int		pos;
@@ -55,7 +55,7 @@ t_rm		*ft_getroom(t_rd **rd)
 	return (rm);
 }
 
-t_rm		*ft_push_front(t_rm *rm, int pos)
+t_rm			*ft_push_front(t_rm *rm, int pos)
 {
 	t_rm *beg;
 	t_rm *tmp;
@@ -76,25 +76,25 @@ t_rm		*ft_push_front(t_rm *rm, int pos)
 	return (rm);
 }
 
-int			rm_check(t_rm *room, t_rd *rd)
+int				rm_check(t_rm *rm, t_rd *rd)
 {
 	t_rm *beg;
 
 	while (rd_iscom(rd->data))
 		rd = rd->next;
 	if (!rd_ispipe(rd->data))
-		ft_error_lemin(rd, room);
-	if (!room)
+		ft_error_lemin(rd, rm, NULL);
+	if (!rm)
 		return (0);
-	beg = room;
+	beg = rm;
 	while (beg)
 	{
-		room = beg->next;
-		while (room)
+		rm = beg->next;
+		while (rm)
 		{
-			if (!ft_strcmp(beg->data[0], room->data[0]))
+			if (!ft_strcmp(beg->data[0], rm->data[0]))
 				return (0);
-			room = room->next;
+			rm = rm->next;
 		}
 		beg = beg->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 13:56:47 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 17:01:10 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,22 @@ void	ft_display_rm(t_rm *rm)
 	}
 }
 
+void	ft_display_path(int *path)
+{
+	int i;
+
+	i = -1;
+	while (path[++i] != -1)
+		ft_printf("%d\n", path[i]);
+}
+
 int		main(int ac, char **av)
 {
 	int		ants;
 	t_rd	*rd;
-	t_rm	*room;
+	t_rm	*rm;
 	int		**matrix;
+	int		*path;
 
 	(void)ac;
 	(void)av;
@@ -45,16 +55,21 @@ int		main(int ac, char **av)
 	//ft_putchar('\n');
 
 	ants = ft_getants(&rd);
-	ft_printf("%d\n\n", ants);
+	//ft_printf("%d\n\n", ants);
 
-	room = ft_getroom(&rd);
-	rm_check(room, rd);
-	room = ft_push_front(room, 1);
-	room = ft_push_front(room, -1);
-	//ft_display_rm(room);
+	rm = ft_getroom(&rd);
+	rm_check(rm, rd);
+	rm = ft_push_front(rm, 1);
+	rm = ft_push_front(rm, -1);
+	//ft_display_rm(rm);
 
-	matrix = ft_matrix(&rd, room);
-	ft_display_matrix(matrix, room);
+	matrix = ft_matrix(&rd, rm);
+	//ft_display_matrix(matrix, rm);
 
-	ft_free_lemin(rd, room, matrix);
+	//(void)path;
+	path = ft_bfs(rm, matrix);
+	ft_display_path(path);
+	free(path);
+
+	ft_free_lemin(rd, rm, matrix);
 }

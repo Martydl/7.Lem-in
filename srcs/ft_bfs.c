@@ -6,60 +6,78 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 14:13:05 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 17:34:03 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void		ft_addtoq(t_bfs *bfs, int **matrix)
+static int		ft_addtoq(t_bfs *bfs, int b)
 {
-	int		b;
-	int		i;
 	t_q		*q;
 	t_q		*tmp;
 
-	b = 0;
-	i = -1;
-	tmp = bfs->q;
-	while (b < bfs->nbroom)
+	bfs->prev[b] = bfs->room;
+	if (!(q = (t_q*)malloc(sizeof(t_q))))
+		return (0);
+	q->room = b;
+	q->next = NULL;
+	if (!bfs->q)
+		bfs->q = q;
+	else
 	{
-		while (matrix[bfs->room][b] <= 0)
-			b -= matrix[bfs->room][b];
-		if (b < bfs->nbroom && bfs->prev[b] < 0)
-		{
-			bfs->prev[b] = bfs->room;
-			if (!(q = (t_q*)malloc(sizeof(t_q))))
-				return (NULL);
-			q->room = b;
-			while (tmp->next != NULL)
-				tmp = tmp->next;
-			tmp->next = q;
-		}
+		tmp = bfs->q;
+		while (bfs->q->next)
+			bfs->q = bfs->q->next;
+		bfs->q->next = q;
+		bfs->q = tmp;
 	}
+	b++;
+	return (b);
 }
 
-static int		*ft_fill_path(int **prev)
+static void		ft_scan(t_bfs *bfs, int **matrix)
 {
-	return (NULL);
-}
-
-static t_bfs	*ft_setbfs(t_rm *rm)
-{
-	t_bfs	*bfs;
+	int		b;
 	int		i;
 
+	b = 0;
 	i = -1;
-	if (!(bfs = (t_bfs*)malloc(sizeof(t_bfs))))
+	while (b < bfs->nbroom)
+		if (matrix[bfs->room][b] < 0)
+			b -= matrix[bfs->room][b];
+		else if (b == bfs->room)
+			b++;
+		else if (bfs->prev[b] < 0)
+			b = ft_addtoq(bfs, b);
+		else
+			b++;
+}
+
+static int		*ft_fill_path(t_bfs *bfs)
+{
+	int		*path;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (j != 1)
+	{
+		j = bfs->prev[j];
+		i++;
+	}
+	if (!(path = (int*)malloc(sizeof(int) * (i + 1))))
 		return (NULL);
-	bfs->room = 1;
-	bfs->nbroom = ft_nbroom(rm);
-	if (!(bfs->prev = (int*)malloc(sizeof(int) * bfs->nbroom)))
-		return (NULL);
-	while (++i < bfs->nbroom)
-		bfs->prev[i] = -1;
-	bfs->q = NULL;
-	return (bfs);
+	path[i] = -1;
+	j = 0;
+	while (j != 1)
+	{
+		path[--i] = j;
+		j = bfs->prev[j];
+	}
+	ft_freebfs(bfs);
+	return (path);
 }
 
 int				*ft_bfs(t_rm *rm, int **matrix)
@@ -69,27 +87,11 @@ int				*ft_bfs(t_rm *rm, int **matrix)
 	bfs = ft_setbfs(rm);
 	while (bfs->room != 0)
 	{
-		ft_addtoq(bfs, matrix);
+		ft_scan(bfs, matrix);
 		if (!bfs->q)
-			error();
+			ft_error_lemin(NULL, rm, matrix);
 		bfs->room = bfs->q->room;
 		ft_deloneq(bfs);
 	}
 	return (ft_fill_path(bfs));
 }
-
-
-/*
-
-while
-- scan next
-	- fill prev if not filled
-- get next q
-
-while
-- find next b
-- if !prev[b]
-	- malloc sizeof int prev[b] write room
-- q[next] = b
-
-*/

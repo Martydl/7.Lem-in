@@ -7,7 +7,9 @@ SRCS_NAME =	main.c \
 			ft_room.c \
 			ft_matrix.c \
 			ft_display_matrix.c \
+			ft_bfs.c \
 			ft_error.c \
+			tools_bfs.c \
 			tools_is.c \
 			tools_lst.c
 
