@@ -6,6 +6,13 @@
 
 - add colors to printf ✓︎
 
-- add empty int opti to matrix
+- add empty int opti to matrix ✓︎
 
-- isenough function
+- bfs ✓︎
+
+- perhaps a real main ?
+
+- secure malloc returns realistically :'(
+
+-  ALGO
+
