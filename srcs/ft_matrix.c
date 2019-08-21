@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 13:59:14 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 19:42:05 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,21 @@ int			**ft_matrix(t_rd **rd, t_rm *room)
 	/*if (!ft_isenough())
 		ft_error_lemin(*rd, room, matrix);*/
 	return (matrix);
+}
+
+void		ft_optimatrix(int **matrix, t_rm *rm)
+{
+	int		nb;
+	int		i;
+	int		j;
+
+	nb = ft_nbroom(rm);
+	i = nb;
+	while (--i >= 0)
+	{
+		j = nb;
+		while (--j >= 0)
+			if (j + 1 != nb && matrix[i][j] < 0 && matrix[i][j + 1] < 0)
+				matrix[i][j] = matrix[i][j + 1] - 1;
+	}
 }

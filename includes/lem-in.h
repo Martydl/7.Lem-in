@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 17:30:17 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 19:39:59 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			ft_deloneq(t_bfs *bfs);
 int				*ft_bfs(t_rm *rm, int **matrix);
 t_bfs			*ft_setbfs(t_rm *rm);
 void			ft_freebfs(t_bfs *bfs);
+void			ft_optimatrix(int **matrix, t_rm *rm);
 
 void			ft_display_rd(t_rd *rd);
 void			ft_display_rm(t_rm *rm);
