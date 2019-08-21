@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:46:51 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 15:09:48 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 13:55:47 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void		ft_display_matrix(int **matrix, t_rm *room)
 		ft_display_name(&cp, 1);
 		j = -1;
 		while (++j < nb)
-			if (!matrix[i][j])
+			if (matrix[i][j] < 0)
 				ft_printf("%5c", '.');
-			else if (matrix[i][j] > 0)
+			else if (i == j)
 				ft_printf("%6k%5d%0k", matrix[i][j]);
 			else
 				ft_printf("%5d", matrix[i][j]);

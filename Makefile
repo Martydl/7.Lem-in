@@ -2,11 +2,14 @@ NAME = lem-in
 
 # Sources
 
-SRCS_NAME =	parsing.c \
-			tools.c \
+SRCS_NAME =	main.c \
+			ft_read.c \
+			ft_room.c \
+			ft_matrix.c \
 			ft_display_matrix.c \
 			ft_error.c \
-			main.c
+			tools_is.c \
+			tools_lst.c
 
 INCS_NAME	=	lem-in.h
 

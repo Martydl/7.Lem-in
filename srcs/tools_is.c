@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 16:20:17 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/12 17:35:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/21 14:04:22 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,4 @@ int		rd_isroom(char *str)
 int		rd_ispipe(char *str)
 {
 	return (ft_findpattern("%s%s", str, '-') ? 1 : 0);
-}
-
-int		rm_check(t_rm *room, t_rd *rd)
-{
-	t_rm *beg;
-
-	while (rd_iscom(rd->data))
-		rd = rd->next;
-	if (!rd_ispipe(rd->data))
-		ft_error_lemin(rd, room);
-	if (!room)
-		return (0);
-	beg = room;
-	while (beg)
-	{
-		room = beg->next;
-		while (room)
-		{
-			if (!ft_strcmp(beg->data[0], room->data[0]))
-				return (0);
-			room = room->next;
-		}
-		beg = beg->next;
-	}
-	return (1);
 }
