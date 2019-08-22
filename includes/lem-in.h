@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 19:39:59 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 12:22:01 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,10 @@
 # define LEM_IN_H
 
 # include "../libft/includes/libft.h"
+# include "lem-struct.h"
 # include <stdlib.h>
 
-# include "stdio.h"
-
-typedef struct	s_rd
-{
-	char		*data;
-	struct s_rd	*next;
-
-}				t_rd;
-
-typedef struct	s_rm
-{
-	char		**data;
-	int			pos;
-	struct s_rm	*next;
-}				t_rm;
-
-typedef struct s_q
-{
-	int			room;
-	struct s_q	*next;
-}				t_q;
-
-
-typedef struct s_bfs
-{
-	int			room;
-	int			nbroom;
-	int			*prev;
-	struct s_q	*q;
-}				t_bfs;
-
+# include <stdio.h>
 
 t_rd			*ft_read(void);
 t_rm			*ft_getroom(t_rd **rd);
@@ -65,7 +36,7 @@ int				rm_check(t_rm *room, t_rd *rd);
 void			ft_free_lemin(t_rd *rd, t_rm *rm, int **matrix);
 t_rm			*ft_push_front(t_rm *rm, int pos);
 void			ft_deloneq(t_bfs *bfs);
-int				*ft_bfs(t_rm *rm, int **matrix);
+int				*ft_bfs(t_paths *paths, t_rm *rm, int **matrix);
 t_bfs			*ft_setbfs(t_rm *rm);
 void			ft_freebfs(t_bfs *bfs);
 void			ft_optimatrix(int **matrix, t_rm *rm);

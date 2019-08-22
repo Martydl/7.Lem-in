@@ -6,19 +6,22 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 17:34:03 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 12:23:04 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
+/*int		ft_conflicts(t_bfs *bfs, t_paths *paths)
+{}*/
+
 static int		ft_addtoq(t_bfs *bfs, int b)
 {
-	t_q		*q;
-	t_q		*tmp;
+	t_queue		*q;
+	t_queue		*tmp;
 
 	bfs->prev[b] = bfs->room;
-	if (!(q = (t_q*)malloc(sizeof(t_q))))
+	if (!(q = (t_queue*)malloc(sizeof(t_queue))))
 		return (0);
 	q->room = b;
 	q->next = NULL;
@@ -54,9 +57,9 @@ static void		ft_scan(t_bfs *bfs, int **matrix)
 			b++;
 }
 
-static int		*ft_fill_path(t_bfs *bfs)
+static int		*ft_fillway(t_bfs *bfs)
 {
-	int		*path;
+	int		*way;
 	int		i;
 	int		j;
 
@@ -67,31 +70,32 @@ static int		*ft_fill_path(t_bfs *bfs)
 		j = bfs->prev[j];
 		i++;
 	}
-	if (!(path = (int*)malloc(sizeof(int) * (i + 1))))
+	if (!(way = (int*)malloc(sizeof(int) * (i + 1))))
 		return (NULL);
-	path[i] = -1;
+	way[i] = -1;
 	j = 0;
 	while (j != 1)
 	{
-		path[--i] = j;
+		way[--i] = j;
 		j = bfs->prev[j];
 	}
 	ft_freebfs(bfs);
-	return (path);
+	return (way);
 }
 
-int				*ft_bfs(t_rm *rm, int **matrix)
+int				*ft_bfs(t_paths *paths, t_rm *rm, int **matrix)
 {
 	t_bfs	*bfs;
 
+	(void)paths;
 	bfs = ft_setbfs(rm);
 	while (bfs->room != 0)
 	{
 		ft_scan(bfs, matrix);
 		if (!bfs->q)
-			ft_error_lemin(NULL, rm, matrix);
+			return (NULL);
 		bfs->room = bfs->q->room;
 		ft_deloneq(bfs);
 	}
-	return (ft_fill_path(bfs));
+	return (ft_fillway(bfs));
 }

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 19:42:05 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 12:38:28 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ static int	**ft_initmatrix(t_rm *room)
 			return (NULL);
 		j = -1;
 		while (++j < nbroom)
-			matrix[i][j] = -1;
+		{
+			if (i == j)
+				matrix[i][j] = 0;
+			else
+				matrix[i][j] = -1;
+		}
 	}
 	return (matrix);
 }

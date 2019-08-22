@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:03:15 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 17:14:10 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 11:53:34 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,4 @@ int		ft_getpos(t_rm *room, char *name)
 		i++;
 	}
 	return (i);
-}
-
-void	ft_deloneq(t_bfs *bfs)
-{
-	t_q		*tmp;
-
-	tmp = bfs->q;
-	bfs->q = bfs->q->next;
-	free(tmp);
 }

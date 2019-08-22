@@ -9,10 +9,22 @@
 - add empty int opti to matrix ✓︎
 
 - bfs ✓︎
+- add conflicts management
 
 - perhaps a real main ?
 
 - secure malloc returns realistically :'(
 
 -  ALGO
+	- check room nblinks before bfs
+	- generate a common denominator based on the shortest way, add them and compare the results
+		- doesnt take into account the ammount of ants
+		-  separate each way, longest = bad, shortest not always good
+		-  maybe base it on the longest ?
+		- find a way to  determine wether or not a second  way is worth it
+			- divide nb moves by nb ways, add extra moves on second lane
 
+	requirements :
+		- length of a way
+		- relative comparison between lanes (w/ compatibility)
+		- need a way to find moves per way accounting for ants

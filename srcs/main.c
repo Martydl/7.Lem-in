@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 19:43:56 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 12:09:53 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int		main(int ac, char **av)
 
 	matrix = ft_matrix(&rd, rm);
 	ft_optimatrix(matrix, rm);
-	//ft_display_matrix(matrix, rm);
+	ft_display_matrix(matrix, rm);
 
 	//(void)path;
-	path = ft_bfs(rm, matrix);
+	path = ft_bfs(NULL, rm, matrix);
 	ft_display_path(path);
 	free(path);
 

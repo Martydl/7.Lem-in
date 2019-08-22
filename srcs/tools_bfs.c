@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:25:48 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 17:26:17 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/22 12:18:36 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_bfs	*ft_setbfs(t_rm *rm)
 
 void	ft_freebfs(t_bfs *bfs)
 {
-	t_q		*tmp;
+	t_queue		*tmp;
 
 	free(bfs->prev);
 	while (bfs->q)
@@ -43,4 +43,13 @@ void	ft_freebfs(t_bfs *bfs)
 		free(tmp);
 	}
 	free(bfs);
+}
+
+void	ft_deloneq(t_bfs *bfs)
+{
+	t_queue		*tmp;
+
+	tmp = bfs->q;
+	bfs->q = bfs->q->next;
+	free(tmp);
 }
