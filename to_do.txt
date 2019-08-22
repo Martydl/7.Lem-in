@@ -27,4 +27,4 @@
 	requirements :
 		- length of a way
 		- relative comparison between lanes (w/ compatibility)
-		- need a way to find moves per way accounting for ants
+		- need a way to find moves per way accounting for ants and lane comparisons
