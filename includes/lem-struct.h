@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 12:06:32 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/22 12:16:50 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/27 12:10:08 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct		s_bfs
 
 typedef struct		s_paths
 {
-	int				*way;
+	int				*lane;
+	int				ants;
+	int				length;
 	struct s_paths	*next;
 }					t_paths;
 
