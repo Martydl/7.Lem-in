@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:25:48 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/22 12:18:36 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:34:34 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-t_bfs	*ft_setbfs(t_rm *rm)
+t_bfs	*ft_setbfs(t_rm *rm, int start)
 {
 	t_bfs	*bfs;
 	int		i;
@@ -20,7 +20,7 @@ t_bfs	*ft_setbfs(t_rm *rm)
 	i = -1;
 	if (!(bfs = (t_bfs*)malloc(sizeof(t_bfs))))
 		return (NULL);
-	bfs->room = 1;
+	bfs->room = start;
 	bfs->nbroom = ft_nbroom(rm);
 	if (!(bfs->prev = (int*)malloc(sizeof(int) * bfs->nbroom)))
 		return (NULL);

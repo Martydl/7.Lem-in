@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/22 12:09:53 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/28 17:02:38 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,42 @@ void	ft_display_rm(t_rm *rm)
 	}
 }
 
-void	ft_display_path(int *path)
+void	ft_display_path(t_paths *paths)
 {
 	int i;
 
-	i = -1;
-	while (path[++i] != -1)
-		ft_printf("%d\n", path[i]);
+	while (paths)
+	{
+		while (paths->way)
+		{
+			i = -1;
+			while (paths->way->lane[++i] != -1)
+				ft_printf("%3d", paths->way->lane[i]);
+			ft_putchar('\n');
+			paths->way = paths->way->next;
+		}
+		paths = paths->next;
+	}
+}
+
+void	ft_free_paths(t_paths *paths)
+{
+	t_paths	*tmp;
+	t_way	*tmp2;
+
+	while (paths)
+	{
+		while (paths->way)
+		{
+			free(paths->way->lane);
+			tmp2 = paths->way;
+			paths->way = paths->way->next;
+			free(tmp2);
+		}
+		tmp = paths;
+		paths = paths->next;
+		free(tmp);
+	}
 }
 
 int		main(int ac, char **av)
@@ -45,7 +74,7 @@ int		main(int ac, char **av)
 	t_rd	*rd;
 	t_rm	*rm;
 	int		**matrix;
-	int		*path;
+	t_paths	*paths;
 
 	(void)ac;
 	(void)av;
@@ -65,12 +94,13 @@ int		main(int ac, char **av)
 
 	matrix = ft_matrix(&rd, rm);
 	ft_optimatrix(matrix, rm);
-	ft_display_matrix(matrix, rm);
+	//ft_display_matrix(matrix, rm);
 
-	//(void)path;
-	path = ft_bfs(NULL, rm, matrix);
-	ft_display_path(path);
-	free(path);
+	//(void)paths;
+	paths = ft_getpaths(rm, matrix);
+	//dprintf(1, "there\n");
+	ft_display_path(paths);
+	//ft_free_paths(paths);
 
 	ft_free_lemin(rd, rm, matrix);
 }
