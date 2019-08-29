@@ -6,19 +6,19 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 11:59:56 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/28 17:34:48 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:22:59 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-void	ft_puttab(int *tab)
+/*void	ft_puttab(int *tab)
 {
 	int i = -1;
 	while (tab[++i] >= 0)
 		dprintf(1, "%5d", tab[i]);
 	dprintf(1, "%5d", tab[i]);
-}
+}*/
 
 t_way	*ft_newway(t_way *way, int *lane)
 {
@@ -28,6 +28,7 @@ t_way	*ft_newway(t_way *way, int *lane)
 	if  (!(new = (t_way*)malloc(sizeof(t_way))))
 		return (NULL);
 	new->lane = lane;
+	new->ants = 0;
 	new->next = NULL;
 	if (!way)
 		return (new);
@@ -117,6 +118,7 @@ t_paths	*ft_getpaths(t_rm *rm, int **matrix)
 	t_algo	*algo;
 	t_paths *paths;
 	int		i;
+	int		j;
 
 	if (!(algo = (t_algo*)malloc(sizeof(t_algo))))
 		return (NULL);
@@ -128,9 +130,16 @@ t_paths	*ft_getpaths(t_rm *rm, int **matrix)
 		//dprintf(1, "ici\n");
 		algo->way = NULL;
 		algo->conflicts = ft_initconflicts(rm);
-		while ((algo->lane = ft_bfs(algo->start[i], matrix, algo->conflicts, rm)))
+		j = i;
+		while (1)
 		{
-			algo->way = ft_newway(algo->way, algo->lane);
+			if ((algo->lane = ft_bfs(algo->start[j], matrix, algo->conflicts, rm)))
+				algo->way = ft_newway(algo->way, algo->lane);
+			j++;
+			if (algo->start[j] == -1)
+				j = 0;
+			if (j == i)
+				break ;
 			//dprintf(1, "là\n");
 		}
 		free(algo->conflicts);
@@ -138,5 +147,91 @@ t_paths	*ft_getpaths(t_rm *rm, int **matrix)
 	}
 	free(algo->start);
 	free(algo);
+	return (paths);
+}
+
+int		ft_lanelen(int *lane)
+{
+	int i;
+
+	i = 0;
+	while (lane[i] != -1)
+		i++;
+	return (i);
+}
+
+void	ft_sortways(t_way *way)
+{
+	t_way	*beg;
+	int		*tmp;
+
+	beg = way;
+	way->length = ft_lanelen(way->lane);
+	while (way->next)
+	{
+		way->length = ft_lanelen(way->lane);
+		way->next->length = ft_lanelen(way->next->lane);
+		if (way->length > way->next->length)
+		{
+			tmp = way->lane;
+			way->lane = way->next->lane;
+			way->next->lane = tmp;
+			way = beg;
+		}
+		else
+			way = way->next;
+	}
+}
+
+void	ft_fillway(t_way *way, int ants)
+{
+	t_way	*beg;
+
+	ft_sortways(way);
+	beg = way;
+	while (ants)
+	{
+		while (way && way->next && way->ants + way->length > way->next->ants + way->next->length)
+			way = way->next;
+		way->ants++;
+		ants--;
+		way = beg;
+	}
+}
+
+void	ft_delpath(t_paths *path)
+{
+	t_way	*tmp;
+
+	while (path->way)
+	{
+		free(path->way->lane);
+		tmp = path->way;
+		path->way = path->way->next;
+		free(tmp);
+	}
+	free(path);
+}
+
+t_paths	*ft_bestpath(t_paths *paths, int ants)
+{
+	t_paths	*tmp;
+
+	ft_fillway(paths->way, ants);
+	while (paths->next)
+	{
+		ft_fillway(paths->next->way, ants);
+		if (paths->way->ants + paths->way->length > paths->next->way->ants + paths->next->way->length)
+		{
+			tmp = paths;
+			paths = paths->next;
+		}
+		else
+		{
+			tmp = paths->next;
+			paths->next = paths->next->next;
+		}
+		ft_delpath(tmp);
+	}
 	return (paths);
 }

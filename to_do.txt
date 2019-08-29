@@ -35,4 +35,6 @@
 	- index them (longest = 1)
 	- compare every possibility
 
+- visu
 
+- secure parsing rd error (actually put fckin error check everywhere...)

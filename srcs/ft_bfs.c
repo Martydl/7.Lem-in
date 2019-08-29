@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/28 16:57:05 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 11:27:31 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_putq(t_queue *q)
 {
 	if (q)
 	{
-		dprintf(1, "%5d", q->room);
+		dprintf(1, "%3d", q->room);
 		q = q->next;
 	}
 }
@@ -59,14 +59,15 @@ static void		ft_scan(t_bfs *bfs, int **matrix, int *conflicts)
 			b++;
 		else if (bfs->prev[b] < 0 && conflicts[b] < 0)
 		{
-			conflicts[b] = 1;
+			if (b != 0)
+				conflicts[b] = 1;
 			b = ft_addtoq(bfs, b);
 		}
 		else
 			b++;
 }
 
-/*void	ft_puttab(int *tab)
+void	ft_puttab(int *tab)
 {
 	int i = -1;
 
@@ -74,7 +75,7 @@ static void		ft_scan(t_bfs *bfs, int **matrix, int *conflicts)
 		dprintf(1, "%5d", tab[i]);
 	dprintf(1, "%5d", tab[i]);
 	ft_putchar('\n');
-}*/
+}
 
 static int		*ft_filllane(t_bfs *bfs, int start)
 {
