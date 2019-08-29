@@ -9,7 +9,7 @@
 - add empty int opti to matrix ✓︎
 
 - bfs ✓︎
-- add conflicts management
+- add cflct management ✓︎
 
 - perhaps a real main ?
 
@@ -18,22 +18,8 @@
 - is enough system
 
 -  ALGO
-	- check room nblinks before bfs
-	- generate a common denominator based on the shortest lane, add them and compare the results
-		- doesnt take into account the ammount of ants
-		-  separate each lane, longest = bad, shortest not always good
-		-  maybe base it on the longest ?
-		- find a way to  determine wether or not a second lane is worth it
-			- divide nb moves by nb lanes, add extra moves on second lane
-
-	requirements :
-		- length of a lane
-		- relative comparison between lanes (w/ compatibility)
-		- need a way to find moves per lane accounting for ants and lane comparisons
-
-	- get all lanes, length them + keep longest
-	- index them (longest = 1)
-	- compare every possibility
+	- get best path ✓︎
+	- execute
 
 - visu
 

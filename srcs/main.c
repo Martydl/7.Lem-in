@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 14:23:43 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:48:46 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,43 +30,26 @@ void	ft_display_rm(t_rm *rm)
 	}
 }
 
-void	ft_display_path(t_paths *paths)
+void	ft_display_path(t_path *path)
 {
-	int i;
+	int		i;
+	t_way	*beg;
 
-	while (paths)
+	while (path)
 	{
-		while (paths->way)
+		beg = path->way;
+		while (path->way)
 		{
-			//ft_printf("%2k%d%0k", paths->way->length);
-			ft_printf("%1k%5d%0k", paths->way->ants);
+			//ft_printf("%2k%d%0k", path->way->length);
+			ft_printf("%1k%5d%0k", path->way->ants);
 			i = -1;
-			while (paths->way->lane[++i] != -1)
-				ft_printf("%3d", paths->way->lane[i]);
+			while (path->way->lane[++i] != -1)
+				ft_printf("%3d", path->way->lane[i]);
 			ft_putchar('\n');
-			paths->way = paths->way->next;
+			path->way = path->way->next;
 		}
-		paths = paths->next;
-	}
-}
-
-void	ft_free_paths(t_paths *paths)
-{
-	t_paths	*tmp;
-	t_way	*tmp2;
-
-	while (paths)
-	{
-		while (paths->way)
-		{
-			free(paths->way->lane);
-			tmp2 = paths->way;
-			paths->way = paths->way->next;
-			free(tmp2);
-		}
-		tmp = paths;
-		paths = paths->next;
-		free(tmp);
+		path->way = beg;
+		path = path->next;
 	}
 }
 
@@ -76,7 +59,7 @@ int		main(int ac, char **av)
 	t_rd	*rd;
 	t_rm	*rm;
 	int		**matrix;
-	t_paths	*paths;
+	t_path	*paths;
 
 	(void)ac;
 	(void)av;
@@ -105,9 +88,9 @@ int		main(int ac, char **av)
 	//ft_sortways(paths->next->way);
 	//ft_fillway(paths->next->way, ants);
 	paths = ft_bestpath(paths, ants);
-	//ft_display_path(paths);
-	ft_delpath(paths);
+	ft_display_path(paths);
+	//ft_delpath(paths);
 	//ft_free_paths(paths);
 
-	ft_free_lemin(rd, rm, matrix);
+	ft_free_lemin(rd, rm, matrix, paths);
 }

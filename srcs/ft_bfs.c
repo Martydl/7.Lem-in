@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 11:27:31 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:16:26 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		ft_addtoq(t_bfs *bfs, int b)
 	t_queue		*q;
 	t_queue		*tmp;
 
-	bfs->prev[b] = bfs->room;
+	bfs->link[b] = bfs->room;
 	if (!(q = (t_queue*)malloc(sizeof(t_queue))))
 		return (0);
 	q->room = b;
@@ -36,16 +36,7 @@ static int		ft_addtoq(t_bfs *bfs, int b)
 	return (b);
 }
 
-void	ft_putq(t_queue *q)
-{
-	if (q)
-	{
-		dprintf(1, "%3d", q->room);
-		q = q->next;
-	}
-}
-
-static void		ft_scan(t_bfs *bfs, int **matrix, int *conflicts)
+static void		ft_scan(t_bfs *bfs, int **matrix, int *cflct)
 {
 	int		b;
 	int		i;
@@ -57,24 +48,14 @@ static void		ft_scan(t_bfs *bfs, int **matrix, int *conflicts)
 			b -= matrix[bfs->room][b];
 		else if (b == bfs->room)
 			b++;
-		else if (bfs->prev[b] < 0 && conflicts[b] < 0)
+		else if (bfs->link[b] < 0 && cflct[b] < 0)
 		{
 			if (b != 0)
-				conflicts[b] = 1;
+				cflct[b] = 1;
 			b = ft_addtoq(bfs, b);
 		}
 		else
 			b++;
-}
-
-void	ft_puttab(int *tab)
-{
-	int i = -1;
-
-	while (tab[++i] >= 0)
-		dprintf(1, "%5d", tab[i]);
-	dprintf(1, "%5d", tab[i]);
-	ft_putchar('\n');
 }
 
 static int		*ft_filllane(t_bfs *bfs, int start)
@@ -87,7 +68,7 @@ static int		*ft_filllane(t_bfs *bfs, int start)
 	j = 0;
 	while (j != start)
 	{
-		j = bfs->prev[j];
+		j = bfs->link[j];
 		i++;
 	}
 	i++;
@@ -98,21 +79,21 @@ static int		*ft_filllane(t_bfs *bfs, int start)
 	while (j != start)
 	{
 		lane[--i] = j;
-		j = bfs->prev[j];
+		j = bfs->link[j];
 	}
 	lane[--i] = start;
 	ft_freebfs(bfs);
 	return (lane);
 }
 
-int				*ft_bfs(int start, int **matrix, int *conflicts, t_rm *rm)
+int				*ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 {
 	t_bfs	*bfs;
 
 	bfs = ft_setbfs(rm, start);
 	while (bfs->room != 0)
 	{
-		ft_scan(bfs, matrix, conflicts);
+		ft_scan(bfs, matrix, cflct);
 		if (!bfs->q)
 		{
 			ft_freebfs(bfs);

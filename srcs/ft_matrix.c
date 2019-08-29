@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/28 15:23:46 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:52:31 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int			**ft_matrix(t_rd **rd, t_rm *room)
 		else
 			break ;
 	}
-	/*if (!ft_isenough())
-		ft_error_lemin(*rd, room, matrix);*/
 	return (matrix);
 }
 

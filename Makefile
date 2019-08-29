@@ -8,10 +8,13 @@ SRCS_NAME =	main.c \
 			ft_matrix.c \
 			ft_display_matrix.c \
 			ft_bfs.c \
-			algo.c \
+			ft_getpaths.c \
+			ft_bestpath.c \
+			ft_free.c \
 			ft_error.c \
 			tools_bfs.c \
 			tools_is.c \
+			tools_path.c \
 			tools_lst.c
 
 INCS_NAME	=	lem-in.h
