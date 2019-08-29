@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 14:48:46 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:26:38 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	ft_display_path(t_path *path)
 			ft_printf("%1k%5d%0k", path->way->ants);
 			i = -1;
 			while (path->way->lane[++i] != -1)
-				ft_printf("%3d", path->way->lane[i]);
+				ft_printf("%10d", path->way->lane[i]);
 			ft_putchar('\n');
 			path->way = path->way->next;
 		}
+		ft_putchar('\n');
 		path->way = beg;
 		path = path->next;
 	}

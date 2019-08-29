@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 15:16:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:26:48 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,12 @@ static void		ft_scan(t_bfs *bfs, int **matrix, int *cflct)
 		else if (b == bfs->room)
 			b++;
 		else if (bfs->link[b] < 0 && cflct[b] < 0)
-		{
-			if (b != 0)
-				cflct[b] = 1;
 			b = ft_addtoq(bfs, b);
-		}
 		else
 			b++;
 }
 
-static int		*ft_filllane(t_bfs *bfs, int start)
+static int		*ft_filllane(t_bfs *bfs, int start, int *cflct)
 {
 	int		*lane;
 	int		i;
@@ -79,6 +75,8 @@ static int		*ft_filllane(t_bfs *bfs, int start)
 	while (j != start)
 	{
 		lane[--i] = j;
+		if (j != 0)
+			cflct[j] = 1;
 		j = bfs->link[j];
 	}
 	lane[--i] = start;
@@ -86,11 +84,22 @@ static int		*ft_filllane(t_bfs *bfs, int start)
 	return (lane);
 }
 
+void	ft_putq(t_queue *q)
+{
+	while (q)
+	{
+		dprintf(1, "%5d", q->room);
+		q = q->next;
+	}
+	ft_putchar('\n');
+}
+
 int				*ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 {
 	t_bfs	*bfs;
 
 	bfs = ft_setbfs(rm, start);
+	cflct[start] = 1;
 	while (bfs->room != 0)
 	{
 		ft_scan(bfs, matrix, cflct);
@@ -102,5 +111,5 @@ int				*ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 		bfs->room = bfs->q->room;
 		ft_deloneq(bfs);
 	}
-	return (ft_filllane(bfs, start));
+	return (ft_filllane(bfs, start, cflct));
 }
