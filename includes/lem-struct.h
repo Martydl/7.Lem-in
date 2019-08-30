@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 12:06:32 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 15:34:27 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/30 14:54:44 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct		s_bfs
 	int				room;
 	int				nbroom;
 	int				*link;
+	int				*dont;
 	struct s_queue	*q;
 }					t_bfs;
 

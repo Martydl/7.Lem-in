@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 15:31:27 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:55:33 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void			ft_error(t_rd *rd, t_rm *rm, int **matrix);
 t_algo			*ft_initalgo(int **matrix, t_rm *rm);
 int				*ft_initcflct(t_rm *rm);
 int				*ft_getstart(int **matrix, t_rm *rm);
+void			ft_delway(t_path *path);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:28:01 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 15:39:38 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:57:58 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int		*ft_getstart(int **matrix, t_rm *rm)
 	int		j;
 	int		k;
 
-	if (matrix[1][1] <= matrix[0][0] && (i = 1))
-		j = matrix[1][1];
-	if (matrix[1][1] > matrix[0][0] && (i = 0))
-		j = matrix[0][0];
+//	if (matrix[1][1] <= matrix[0][0] && (i = 1))
+	i = 1;
+	j = matrix[1][1];
+//	if (matrix[1][1] > matrix[0][0] && (i = 0))
+//		j = matrix[0][0];
 	if (!(ret = (int*)malloc(sizeof(int) * (j + 1))))
 		return (NULL);
 	ret[j] = -1;
@@ -63,4 +64,20 @@ t_algo	*ft_initalgo(int **matrix, t_rm *rm)
 		return (NULL);
 	al->start = ft_getstart(matrix, rm);
 	return (al);
+}
+
+void	ft_delway(t_path *path)
+{
+	t_way	*tmp;
+
+	while (path->way && path->way->ants != 0)
+		path->way = path->way->next;
+	while (path->way && path->way->next)
+	{
+		tmp = path->way->next;
+		path->way->next = path->way->next->next;
+		free(tmp->lane);
+		free(tmp);
+	}
+	path->way->next = NULL;
 }

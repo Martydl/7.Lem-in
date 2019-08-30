@@ -1,26 +1,13 @@
-- fix make error w/ ft_err conflict (redo Makefiles) ✓
-
-- add start/end part ✓
-
-- full error function ✓︎︎︎︎︎︎︎︎
-
-- add colors to printf ✓︎
-
-- add empty int opti to matrix ✓︎
-
-- bfs ✓︎
-- add cflct management ✓︎
-
-- perhaps a real main ?
-
-- secure malloc returns realistically :'(
-
-- is enough system
-
--  ALGO
+- ALGO
 	- get best path ✓︎
+		- opti start / end
 	- execute
 
 - visu
 
 - secure parsing rd error (actually put fckin error check everywhere...)
+	- is enough system
+
+- secure malloc returns realistically :'(
+
+- perhaps a real main ?

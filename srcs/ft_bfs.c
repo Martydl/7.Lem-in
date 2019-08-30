@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 16:26:48 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/30 16:37:42 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ static int		*ft_filllane(t_bfs *bfs, int start, int *cflct)
 	while (j != start)
 	{
 		lane[--i] = j;
-		if (j != 0)
-			cflct[j] = 1;
+		j != 0 ? cflct[j] = 1 : 1;
 		j = bfs->link[j];
 	}
 	lane[--i] = start;

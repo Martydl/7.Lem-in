@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:25:48 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 14:34:25 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:00:27 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ t_bfs	*ft_setbfs(t_rm *rm, int start)
 	bfs->nbroom = ft_nbroom(rm);
 	if (!(bfs->link = (int*)malloc(sizeof(int) * bfs->nbroom)))
 		return (NULL);
+	if (!(bfs->dont = (int*)malloc(sizeof(int) * bfs->nbroom)))
+		return (NULL);
 	while (++i < bfs->nbroom)
+	{
 		bfs->link[i] = -1;
+		bfs->dont[i] = -1;
+	}
 	bfs->link[1] = 1;
 	bfs->q = NULL;
 	return (bfs);
@@ -36,6 +41,7 @@ void	ft_freebfs(t_bfs *bfs)
 	t_queue		*tmp;
 
 	free(bfs->link);
+	free(bfs->dont);
 	while (bfs->q)
 	{
 		tmp = bfs->q;
