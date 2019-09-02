@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:28:01 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/30 16:57:58 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/08/31 07:11:03 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ t_algo	*ft_initalgo(int **matrix, t_rm *rm)
 void	ft_delway(t_path *path)
 {
 	t_way	*tmp;
+	t_way	*beg;
 
-	while (path->way && path->way->ants != 0)
+	beg = path->way;
+	while (path->way->next && path->way->next->ants != 0)
 		path->way = path->way->next;
-	while (path->way && path->way->next)
+	while (path->way->next)
 	{
 		tmp = path->way->next;
 		path->way->next = path->way->next->next;
@@ -80,4 +82,5 @@ void	ft_delway(t_path *path)
 		free(tmp);
 	}
 	path->way->next = NULL;
+	path->way = beg;
 }
