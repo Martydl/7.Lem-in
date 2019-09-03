@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:39:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 14:45:54 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:02:08 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	ft_free_paths(t_path *paths)
 	{
 		while (paths->way)
 		{
+			free(paths->way->lane[0]);
+			free(paths->way->lane[1]);
 			free(paths->way->lane);
 			tmp2 = paths->way;
 			paths->way = paths->way->next;

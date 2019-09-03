@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/31 07:01:23 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:30:07 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_display_path(t_path *path)
 			//ft_printf("%2k%d%0k", path->way->length);
 			ft_printf("%1k%5d%0k", path->way->ants);
 			i = -1;
-			while (path->way->lane[++i] != -1)
-				ft_printf("%10d", path->way->lane[i]);
+			while (path->way->lane[0][++i] != -1)
+				ft_printf("%10d", path->way->lane[0][i]);
 			ft_putchar('\n');
 			path->way = path->way->next;
 		}
@@ -89,9 +89,10 @@ int		main(int ac, char **av)
 	//ft_sortways(paths->next->way);
 	//ft_fillway(paths->next->way, ants);
 	paths = ft_bestpath(paths, ants);
-	ft_display_path(paths);
+	//ft_display_path(paths);
 	//ft_delpath(paths);
 	//ft_free_paths(paths);
+	ft_doit(paths->way, rm, ants);
 
 	ft_free_lemin(rd, rm, matrix, paths);
 }

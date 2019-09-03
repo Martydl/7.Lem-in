@@ -6,33 +6,23 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/31 07:09:05 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:31:36 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static int	ft_lanelen(int *lane)
-{
-	int i;
-
-	i = 0;
-	while (lane[i] != -1)
-		i++;
-	return (i);
-}
-
 static void	ft_sortways(t_way *way)
 {
 	t_way	*beg;
-	int		*tmp;
+	int		**tmp;
 
 	beg = way;
-	way->length = ft_lanelen(way->lane);
+	way->length = ft_lanelen(way->lane[0]);
 	while (way->next)
 	{
-		way->length = ft_lanelen(way->lane);
-		way->next->length = ft_lanelen(way->next->lane);
+		way->length = ft_lanelen(way->lane[0]);
+		way->next->length = ft_lanelen(way->next->lane[0]);
 		if (way->length > way->next->length)
 		{
 			tmp = way->lane;
@@ -54,7 +44,7 @@ static void	ft_fillway(t_way *way, int ants)
 	while (ants)
 	{
 		while (way && way->next && way->ants + way->length
-			> way->next->ants + way->next->length)
+			>= way->next->ants + way->next->length)
 			way = way->next;
 		way->ants++;
 		ants--;
@@ -68,6 +58,8 @@ static void	ft_delpath(t_path *path)
 
 	while (path->way)
 	{
+		free(path->way->lane[0]);
+		free(path->way->lane[1]);
 		free(path->way->lane);
 		tmp = path->way;
 		path->way = path->way->next;

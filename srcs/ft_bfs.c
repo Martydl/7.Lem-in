@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/30 16:37:42 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:08:13 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void		ft_scan(t_bfs *bfs, int **matrix, int *cflct)
 			b++;
 }
 
-static int		*ft_filllane(t_bfs *bfs, int start, int *cflct)
+static int		**ft_filllane(t_bfs *bfs, int start, int *cflct)
 {
-	int		*lane;
+	int		**lane;
 	int		i;
 	int		j;
 
@@ -68,17 +68,24 @@ static int		*ft_filllane(t_bfs *bfs, int start, int *cflct)
 		i++;
 	}
 	i++;
-	if (!(lane = (int*)malloc(sizeof(int) * (i + 1))))
+	if (!(lane = (int**)malloc(sizeof(int*) * 2)))
 		return (NULL);
-	lane[i] = -1;
+	if (!(lane[0] = (int*)malloc(sizeof(int) * (i + 1))))
+		return (NULL);
+	if (!(lane[1] = (int*)malloc(sizeof(int) * (i + 1))))
+		return (NULL);
+	lane[0][i] = -1;
+	lane[1][i] = -1;
 	j = 0;
 	while (j != start)
 	{
-		lane[--i] = j;
+		lane[0][--i] = j;
+		lane[1][i] = 0;
 		j != 0 ? cflct[j] = 1 : 1;
 		j = bfs->link[j];
 	}
-	lane[--i] = start;
+	lane[0][--i] = start;
+	lane[1][i] = 0;
 	ft_freebfs(bfs);
 	return (lane);
 }
@@ -93,7 +100,7 @@ void	ft_putq(t_queue *q)
 	ft_putchar('\n');
 }
 
-int				*ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
+int				**ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 {
 	t_bfs	*bfs;
 

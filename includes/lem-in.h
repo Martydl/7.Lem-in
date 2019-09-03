@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/30 16:55:33 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:09:53 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				rm_check(t_rm *room, t_rd *rd);
 void			ft_free_lemin(t_rd *rd, t_rm *rm, int **matrix, t_path *paths);
 t_rm			*ft_push_front(t_rm *rm, int pos);
 void			ft_deloneq(t_bfs *bfs);
-int				*ft_bfs(int qone, int **matrix, int *cflct, t_rm *rm);
+int				**ft_bfs(int qone, int **matrix, int *cflct, t_rm *rm);
 t_bfs			*ft_setbfs(t_rm *rm, int start);
 void			ft_freebfs(t_bfs *bfs);
 void			ft_optimatrix(int **matrix, t_rm *rm);
@@ -47,5 +47,7 @@ t_algo			*ft_initalgo(int **matrix, t_rm *rm);
 int				*ft_initcflct(t_rm *rm);
 int				*ft_getstart(int **matrix, t_rm *rm);
 void			ft_delway(t_path *path);
+int				ft_lanelen(int *lane);
+void			ft_doit(t_way *way, t_rm *rm, int ants);;
 
 #endif

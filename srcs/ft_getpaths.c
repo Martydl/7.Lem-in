@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 16:12:07 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 11:16:41 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_puttab(int *tab)
 	ft_putchar('\n');
 }
 
-static t_way	*ft_newway(t_way *way, int *lane)
+static t_way	*ft_newway(t_way *way, int **lane)
 {
 	t_way	*ret;
 	t_way	*new;

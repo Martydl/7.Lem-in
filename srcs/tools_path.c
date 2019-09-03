@@ -6,11 +6,21 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:28:01 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/31 07:11:03 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 11:44:26 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
+
+int		ft_lanelen(int *lane)
+{
+	int i;
+
+	i = 0;
+	while (lane[i] != -1)
+		i++;
+	return (i);
+}
 
 int		*ft_getstart(int **matrix, t_rm *rm)
 {

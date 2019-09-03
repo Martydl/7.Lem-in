@@ -1,7 +1,7 @@
 - ALGO
 	- get best path ✓︎
 		- opti start / end
-	- execute
+	- execute ✓︎
 
 - visu
 
@@ -11,3 +11,5 @@
 - secure malloc returns realistically :'(
 
 - perhaps a real main ?
+
+Algo seems to be working

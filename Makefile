@@ -10,6 +10,7 @@ SRCS_NAME =	main.c \
 			ft_bfs.c \
 			ft_getpaths.c \
 			ft_bestpath.c \
+			ft_doit.c \
 			ft_free.c \
 			ft_error.c \
 			tools_bfs.c \

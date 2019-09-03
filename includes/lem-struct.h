@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 12:06:32 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/30 14:54:44 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:15:56 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_way
 {
 	int				ants;
 	int				length;
-	int				*lane;
+	int				**lane;
 	struct s_way	*next;
 }					t_way;
 
@@ -60,11 +60,17 @@ typedef struct		s_path
 typedef struct		s_algo
 {
 	struct s_way	*way;
-	int				*lane;
+	int				**lane;
 	int				*cflct;
 	int				*start;
 	int				i;
 	int				j;
 }					t_algo;
+
+typedef struct		s_doit
+{
+	int				ants;
+	int				end;
+}					t_doit;
 
 #endif
