@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 15:30:07 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:49:47 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_display_path(t_path *path)
 	}
 }
 
-int		main(int ac, char **av)
+int		main(void)
 {
 	int		ants;
 	t_rd	*rd;
@@ -62,36 +62,20 @@ int		main(int ac, char **av)
 	int		**matrix;
 	t_path	*paths;
 
-	(void)ac;
-	(void)av;
-
 	rd = ft_read();
-	//ft_display_rd(rd);
-	//ft_putchar('\n');
-
+	if (!rd)
+		ft_error(NULL, NULL, NULL);
 	ants = ft_getants(&rd);
-	//ft_printf("%d\n\n", ants);
-
-	rm = ft_getroom(&rd);
-	rm_check(rm, rd);
-	rm = ft_push_front(rm, 1);
-	rm = ft_push_front(rm, -1);
-	//ft_display_rm(rm);
-
+	rm = ft_getroom(&rd, 0, 0);
+	rm = ft_push_front(rm, 1, rd);
+	rm = ft_push_front(rm, -1, rd);
+	if (!rm_check(rm, rd))
+		ft_error(rd, rm, NULL);
 	matrix = ft_matrix(&rd, rm);
-	ft_optimatrix(matrix, rm);
 	//ft_display_matrix(matrix, rm);
-
-	//(void)paths;
 	paths = ft_getpaths(rm, matrix);
-	//dprintf(1, "there\n");
-	//ft_sortways(paths->way);
-	//ft_sortways(paths->next->way);
-	//ft_fillway(paths->next->way, ants);
 	paths = ft_bestpath(paths, ants);
 	//ft_display_path(paths);
-	//ft_delpath(paths);
-	//ft_free_paths(paths);
 	ft_doit(paths->way, rm, ants);
 
 	ft_free_lemin(rd, rm, matrix, paths);

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:25:48 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/30 15:00:27 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:10:35 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_bfs	*ft_setbfs(t_rm *rm, int start)
 	return (bfs);
 }
 
-void	ft_freebfs(t_bfs *bfs)
+void	*ft_freebfs(t_bfs *bfs)
 {
 	t_queue		*tmp;
 
@@ -49,6 +49,7 @@ void	ft_freebfs(t_bfs *bfs)
 		free(tmp);
 	}
 	free(bfs);
+	return (NULL);
 }
 
 void	ft_deloneq(t_bfs *bfs)

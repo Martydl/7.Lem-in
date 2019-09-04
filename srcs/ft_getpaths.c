@@ -6,28 +6,17 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 11:16:41 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:41:34 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
-void	ft_puttab(int *tab)
-{
-	int i;
-
-	i = -1;
-	while (tab[++i] != -1)
-		ft_printf("%5d", tab[i]);
-	ft_putchar('\n');
-}
 
 static t_way	*ft_newway(t_way *way, int **lane)
 {
 	t_way	*ret;
 	t_way	*new;
 
-	//ft_puttab(lane);
 	if (!(new = (t_way*)malloc(sizeof(t_way))))
 		return (NULL);
 	new->lane = lane;
@@ -50,6 +39,8 @@ static t_path	*ft_newpath(t_path *paths, t_way *way)
 	t_path	*new;
 	t_path	*ret;
 
+	/*if (!way)
+		return (paths);*/
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
 	new->way = way;
@@ -77,7 +68,7 @@ t_path			*ft_getpaths(t_rm *rm, int **matrix)
 	while (al->start[++al->i] >= 0)
 	{
 		al->way = NULL;
-		al->cflct = ft_initcflct(rm);
+		al->cflct = ft_initcflct(rm, matrix);
 		al->j = al->i;
 		while (1)
 		{

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:39:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 14:02:08 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:45:34 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_free_matrix(int **matrix, t_rm *rm)
 	int i;
 
 	i = ft_nbroom(rm);
-	while (--i >= 0)
+	while (--i >= 0 && matrix[i])
 		free(matrix[i]);
 	free(matrix);
 }

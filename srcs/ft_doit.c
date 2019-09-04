@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:40:21 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 15:33:31 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:04:10 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ void	ft_doit(t_way *way, t_rm *rm, int ants)
 		ft_putchar('\n');
 	}
 	ft_free_room(room, rm);
+	free(doit);
 }

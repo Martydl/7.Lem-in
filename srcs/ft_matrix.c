@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/29 15:49:28 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:44:54 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	**ft_initmatrix(t_rm *room)
 
 	nbroom = ft_nbroom(room);
 	if (!(matrix = (int**)malloc(sizeof(int*) * nbroom)))
-		return (0);
+		return (NULL);
 	i = -1;
 	while (++i < nbroom)
 	{
@@ -39,15 +39,16 @@ static int	**ft_initmatrix(t_rm *room)
 	return (matrix);
 }
 
-static void	ft_fill(int **matrix, t_rd *rd, t_rm *room)
+static void	ft_fill(int **matrix, t_rd *rd, t_rm *rm)
 {
 	char	**name;
 	int		a;
 	int		b;
 
-	name = ft_strsplit(rd->data, '-');
-	a = ft_getpos(room, name[0]);
-	b = ft_getpos(room, name[1]);
+	if (!(name = ft_strsplit(rd->data, '-')))
+		ft_error(rd, rm, matrix);
+	a = ft_getpos(rm, name[0]);
+	b = ft_getpos(rm, name[1]);
 	free(name[0]);
 	free(name[1]);
 	free(name);
@@ -60,27 +61,7 @@ static void	ft_fill(int **matrix, t_rd *rd, t_rm *room)
 	}
 }
 
-int			**ft_matrix(t_rd **rd, t_rm *room)
-{
-	int		**matrix;
-
-	matrix = ft_initmatrix(room);
-	while (*rd)
-	{
-		if (rd_ispipe((*rd)->data))
-		{
-			ft_fill(matrix, *rd, room);
-			ft_next(rd);
-		}
-		else if (rd_iscom((*rd)->data))
-			ft_next(rd);
-		else
-			break ;
-	}
-	return (matrix);
-}
-
-void		ft_optimatrix(int **matrix, t_rm *rm)
+static void	ft_optimatrix(int **matrix, t_rm *rm)
 {
 	int		nb;
 	int		i;
@@ -95,4 +76,26 @@ void		ft_optimatrix(int **matrix, t_rm *rm)
 			if (j + 1 != nb && matrix[i][j] < 0 && matrix[i][j + 1] < 0)
 				matrix[i][j] = matrix[i][j + 1] - 1;
 	}
+}
+
+int			**ft_matrix(t_rd **rd, t_rm *rm)
+{
+	int		**matrix;
+
+	if (!(matrix = ft_initmatrix(rm)))
+		ft_error(*rd, rm, matrix);
+	while (*rd)
+	{
+		if (rd_ispipe((*rd)->data))
+		{
+			ft_fill(matrix, *rd, rm);
+			ft_next(rd);
+		}
+		else if (rd_iscom((*rd)->data))
+			ft_next(rd);
+		else
+			break ;
+	}
+	ft_optimatrix(matrix, rm);
+	return (matrix);
 }

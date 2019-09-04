@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:28:01 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 11:44:26 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:38:13 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		*ft_getstart(int **matrix, t_rm *rm)
 	return (ret);
 }
 
-int		*ft_initcflct(t_rm *rm)
+int		*ft_initcflct(t_rm *rm, int **matrix)
 {
 	int		*cflct;
 	int		nbroom;
@@ -59,7 +59,7 @@ int		*ft_initcflct(t_rm *rm)
 
 	nbroom = ft_nbroom(rm);
 	if (!(cflct = (int*)malloc(sizeof(int) * nbroom)))
-		return (NULL);
+		ft_error(NULL, rm, matrix);
 	i = -1;
 	while (++i < nbroom)
 		cflct[i] = -1;
@@ -71,7 +71,7 @@ t_algo	*ft_initalgo(int **matrix, t_rm *rm)
 	t_algo	*al;
 
 	if (!(al = (t_algo*)malloc(sizeof(t_algo))))
-		return (NULL);
+		ft_error(NULL, rm, matrix);
 	al->start = ft_getstart(matrix, rm);
 	return (al);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/03 14:08:13 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:47:05 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static int		**ft_filllane(t_bfs *bfs, int start, int *cflct)
 	}
 	i++;
 	if (!(lane = (int**)malloc(sizeof(int*) * 2)))
-		return (NULL);
+		return (ft_freebfs(bfs));
 	if (!(lane[0] = (int*)malloc(sizeof(int) * (i + 1))))
-		return (NULL);
+		return (ft_freebfs(bfs));
 	if (!(lane[1] = (int*)malloc(sizeof(int) * (i + 1))))
-		return (NULL);
+		return (ft_freebfs(bfs));
 	lane[0][i] = -1;
 	lane[1][i] = -1;
 	j = 0;
@@ -90,16 +90,6 @@ static int		**ft_filllane(t_bfs *bfs, int start, int *cflct)
 	return (lane);
 }
 
-void	ft_putq(t_queue *q)
-{
-	while (q)
-	{
-		dprintf(1, "%5d", q->room);
-		q = q->next;
-	}
-	ft_putchar('\n');
-}
-
 int				**ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 {
 	t_bfs	*bfs;
@@ -110,10 +100,7 @@ int				**ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 	{
 		ft_scan(bfs, matrix, cflct);
 		if (!bfs->q)
-		{
-			ft_freebfs(bfs);
-			return (NULL);
-		}
+			return (ft_freebfs(bfs));
 		bfs->room = bfs->q->room;
 		ft_deloneq(bfs);
 	}
