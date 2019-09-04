@@ -16,4 +16,7 @@ Algo seems to be working
 
 - check 2 start empty line error
 
-2147483644-5 ex.txt
+opti paths choosing
+
+conflicts not working
+display stuck while

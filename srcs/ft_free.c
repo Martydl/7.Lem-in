@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:39:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 15:45:34 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:07:23 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void	ft_free_rd(t_rd *beg)
+void		ft_free_rd(t_rd *beg)
 {
 	if (beg)
 	{

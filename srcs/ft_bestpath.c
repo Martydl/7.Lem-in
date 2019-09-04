@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 15:27:24 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:01:30 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_path		*ft_bestpath(t_path *paths, int ants)
 	while (paths->next)
 	{
 		ft_fillway(paths->next->way, ants);
-		if (paths->way->ants + paths->way->length
-			> paths->next->way->ants + paths->next->way->length)
+		if ((long)paths->way->ants + (long)paths->way->length
+			> (long)paths->next->way->ants + (long)paths->next->way->length)
 		{
 			tmp = paths;
 			paths = paths->next;

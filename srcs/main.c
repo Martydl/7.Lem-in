@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 15:49:47 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:08:55 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		main(void)
 	t_path	*paths;
 
 	rd = ft_read();
+	//ft_display_rd(rd);
+	ft_putchar('\n');
 	if (!rd)
 		ft_error(NULL, NULL, NULL);
 	ants = ft_getants(&rd);
@@ -74,6 +76,8 @@ int		main(void)
 	matrix = ft_matrix(&rd, rm);
 	//ft_display_matrix(matrix, rm);
 	paths = ft_getpaths(rm, matrix);
+	if (!paths)
+		ft_error(rd, rm, matrix);
 	paths = ft_bestpath(paths, ants);
 	//ft_display_path(paths);
 	ft_doit(paths->way, rm, ants);

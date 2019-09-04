@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:40:21 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 11:04:10 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:09:15 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
 {
 	int		i;
 
+	(void)room;
+	(void)space;
 	while (way)
 	{
 		i = way->length;
@@ -55,10 +57,10 @@ void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
 			{
 				way->lane[1][i] = way->lane[1][i - 1];
 				way->lane[1][i - 1] = 0;
-				if (space == 0 && (space = 1))
+				/*if (space == 0 && (space = 1))
 					ft_printf("L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
 				else
-					ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
+					ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);*/
 				if (i == way->length - 1)
 					doit->end++;
 			}
@@ -68,10 +70,10 @@ void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
 			way->lane[1][0] = doit->ants;
 			way->ants--;
 			doit->ants--;
-			if (space == 0 && (space = 1))
+			/*if (space == 0 && (space = 1))
 				ft_printf("L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
 			else
-				ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
+				ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);*/
 			if (i == way->length - 1)
 				way->ants--;
 			if (i == way->length - 1)
@@ -108,7 +110,7 @@ void	ft_doit(t_way *way, t_rm *rm, int ants)
 	doit->ants = ants;
 	doit->end = 0;
 	room = ft_initroom(rm);
-	//ft_display(way, room);
+	ft_display(way, room);
 	while (doit->end != ants)
 	{
 		ft_moveants(way, room, doit, 0);

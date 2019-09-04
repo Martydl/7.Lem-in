@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 15:44:54 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:08:28 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int			**ft_matrix(t_rd **rd, t_rm *rm)
 		else
 			break ;
 	}
+	//ft_free_rd(*rd);
 	ft_optimatrix(matrix, rm);
 	return (matrix);
 }
