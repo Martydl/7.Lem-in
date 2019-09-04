@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:08:55 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:35:28 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		main(void)
 	t_path	*paths;
 
 	rd = ft_read();
-	//ft_display_rd(rd);
+	ft_display_rd(rd);
 	ft_putchar('\n');
 	if (!rd)
 		ft_error(NULL, NULL, NULL);

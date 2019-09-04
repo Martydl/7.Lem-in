@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:32:27 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:20:03 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:34:05 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int				**ft_bfs(int start, int **matrix, int *cflct, t_rm *rm)
 {
 	t_bfs	*bfs;
 
+	if (cflct[start] == 1)
+		return (NULL);
 	bfs = ft_setbfs(rm, start);
 	cflct[start] = 1;
 	while (bfs->room != 0)
