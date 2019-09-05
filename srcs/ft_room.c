@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:00:28 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 14:32:43 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:16:55 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_rm			*ft_getroom(t_rd **rd, int start, int end)
 			else if (pos != 0)
 				return (NULL);
 		}
-		if (rd_isroom((*rd)->data))
+		if (rd_isroom((*rd)->data) && (*rd)->data[0] != 'L')
 		{
 			if (!(rm = (t_rm*)malloc(sizeof(t_rm))))
 				return (NULL);

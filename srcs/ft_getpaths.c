@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:20:01 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:27:20 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static t_path	*ft_newpath(t_path *paths, t_way *way)
 	t_path	*new;
 	t_path	*ret;
 
-	/*if (!way)
-		return (paths);*/
+	if (!way)
+		return (paths);
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
 	new->way = way;

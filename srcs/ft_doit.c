@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:40:21 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:35:17 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:25:55 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,39 +65,20 @@ void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
 					doit->end++;
 			}
 		}
-		if (doit->ants && way->ants)
+		if (way->ants)
 		{
 			way->lane[1][0] = doit->ants;
 			way->ants--;
-			doit->ants--;
+			doit->ants++;
 			if (space == 0 && (space = 1))
 				ft_printf("L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
 			else
 				ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
 			if (i == way->length - 1)
-				way->ants--;
-			if (i == way->length - 1)
 				doit->end++;
 		}
 		way = way->next;
 	}
-}
-
-void	ft_display(t_way *way, char **room)
-{
-	int		i;
-
-	while (way)
-	{
-		//ft_printf("%2k%d%0k", way->length);
-		ft_printf("%1k%5d%0k", way->ants);
-		i = -1;
-		while (way->lane[0][++i] != -1)
-			ft_printf("%10s", room[way->lane[0][i]]);
-		ft_putchar('\n');
-		way = way->next;
-	}
-	ft_putchar('\n');
 }
 
 void	ft_doit(t_way *way, t_rm *rm, int ants)
@@ -107,14 +88,13 @@ void	ft_doit(t_way *way, t_rm *rm, int ants)
 
 	if (!(doit = (t_doit*)malloc(sizeof(doit))))
 		return ;
-	doit->ants = ants;
+	doit->ants = 1;
 	doit->end = 0;
 	room = ft_initroom(rm);
-	//ft_display(way, room);
 	while (doit->end != ants)
 	{
 		ft_moveants(way, room, doit, 0);
-		ft_putchar('\n');
+		ft_putendl("");
 	}
 	ft_free_room(room, rm);
 	free(doit);

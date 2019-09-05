@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:35:28 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:29:13 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ int		main(void)
 	//ft_display_matrix(matrix, rm);
 	paths = ft_getpaths(rm, matrix);
 	if (!paths)
-		ft_error(rd, rm, matrix);
+		ft_error(NULL, rm, matrix);
 	paths = ft_bestpath(paths, ants);
 	//ft_display_path(paths);
 	ft_doit(paths->way, rm, ants);
 
-	ft_free_lemin(rd, rm, matrix, paths);
+	ft_free_lemin(NULL, rm, matrix, paths);
+	return (0);
 }

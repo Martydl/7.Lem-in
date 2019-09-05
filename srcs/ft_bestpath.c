@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 16:01:30 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:22:44 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_fillway(t_way *way, int ants)
 	while (ants)
 	{
 		while (way && way->next && way->ants + way->length
-			>= way->next->ants + way->next->length)
+			> way->next->ants + way->next->length)
 			way = way->next;
 		way->ants++;
 		ants--;

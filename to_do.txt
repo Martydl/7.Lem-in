@@ -1,22 +1,7 @@
-- ALGO
-	- get best path ✓︎
-		- opti start / end
-	- execute ✓︎
-
-- visu
-
-- secure parsing rd error (actually put fckin error check everywhere...)
-	- is enough system
-
-- secure malloc returns realistically :'(
-
 - perhaps a real main ?
 
-Algo seems to be working
+- ALGO
+	- opti start / end (time)
+	- opti move on big
 
-- check 2 start empty line error
-
-opti paths choosing
-
-conflicts not working
-display stuck while
+- opti paths choosing
