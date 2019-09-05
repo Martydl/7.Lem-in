@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:00:28 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 14:16:55 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:54:04 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@ static int		ft_checkpos(t_rd **rd, int start, int end)
 	if (ret == 0 || (ret == 1 && start == 0) || (ret == -1 && end == 0))
 		ft_next(rd);
 	return (ret);
+}
+
+t_rm			*ft_makeroom(t_rd **rd, int pos, int start, int end)
+{
+	t_rm	*rm;
+
+	if (!(rm = (t_rm*)malloc(sizeof(t_rm))))
+		return (NULL);
+	if (!(rm->data = ft_strsplit((*rd)->data, ' ')))
+	{
+		free(rm);
+		return (NULL);
+	}
+	rm->pos = pos;
+	ft_next(rd);
+	rm->next = ft_getroom(rd, start, end);
+	return (rm);
 }
 
 t_rm			*ft_getroom(t_rd **rd, int start, int end)
@@ -46,18 +63,7 @@ t_rm			*ft_getroom(t_rd **rd, int start, int end)
 				return (NULL);
 		}
 		if (rd_isroom((*rd)->data) && (*rd)->data[0] != 'L')
-		{
-			if (!(rm = (t_rm*)malloc(sizeof(t_rm))))
-				return (NULL);
-			if (!(rm->data = ft_strsplit((*rd)->data, ' ')))
-			{
-				free(rm);
-				return (NULL);
-			}
-			rm->pos = pos;
-			ft_next(rd);
-			rm->next = ft_getroom(rd, start, end);
-		}
+			rm = ft_makeroom(rd, pos, start, end);
 		else
 			return (NULL);
 	}

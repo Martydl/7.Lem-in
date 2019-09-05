@@ -5,3 +5,5 @@
 	- opti move on big
 
 - opti paths choosing
+
+- unknown room

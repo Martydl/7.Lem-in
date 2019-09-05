@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 17:25:48 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 15:10:35 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:35:24 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ t_bfs	*ft_setbfs(t_rm *rm, int start)
 	bfs->link[1] = 1;
 	bfs->q = NULL;
 	return (bfs);
+}
+
+int		**ft_initlane(int i)
+{
+	int **lane;
+
+	if (!(lane = (int**)malloc(sizeof(int*) * 2)))
+		return (NULL);
+	if (!(lane[0] = (int*)malloc(sizeof(int) * (i + 1))))
+		return (NULL);
+	if (!(lane[1] = (int*)malloc(sizeof(int) * (i + 1))))
+		return (NULL);
+	lane[0][i] = -1;
+	lane[1][i] = -1;
+	return (lane);
 }
 
 void	*ft_freebfs(t_bfs *bfs)

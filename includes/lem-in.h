@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/04 17:19:59 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:36:46 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			ft_delway(t_path *path);
 int				ft_lanelen(int *lane);
 void			ft_doit(t_way *way, t_rm *rm, int ants);
 void			ft_free_rd(t_rd *beg);
+int				**ft_initlane(int i);
 
 
 void	ft_display_path(t_path *path);
