@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 14:06:00 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:28:20 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_sortway(t_way *way)
 	}
 }
 
-static void	ft_fillway(t_way *way, int ants)
+/*static void	ft_fillway(t_way *way, int ants)
 {
 	t_way	*beg;
 
@@ -48,6 +48,34 @@ static void	ft_fillway(t_way *way, int ants)
 			way = way->next;
 		way->ants++;
 		ants--;
+		way = beg;
+	}
+}*/
+
+static void	ft_fillway(t_way *way, int ants)
+{
+	t_way	*beg;
+	int		last;
+	int		i;
+
+	ft_sortway(way);
+	beg = way;
+	while (ants)
+	{
+		last = 1;
+		i = 0;
+		while (way->next && way->ants + way->length >= way->next->ants + way->next->length)
+		{
+			way = way->next;
+			last++;
+		}
+		way = beg;
+		while (ants && i++ < last)
+		{
+			way->ants++;
+			way = way->next;
+			ants--;
+		}
 		way = beg;
 	}
 }
