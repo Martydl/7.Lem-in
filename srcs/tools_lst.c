@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:03:15 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 15:29:36 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 14:06:48 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,5 @@ int		ft_getpos(t_rm *rm, char *name)
 		rm = rm->next;
 		i++;
 	}
-	/*if (i == ft_nbroom(rm))
-		return (-1);*/
 	return (i);
 }

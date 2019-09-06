@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 14:51:18 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 14:29:35 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static int	ft_fill(int **matrix, t_rd *rd, t_rm *rm)
 	free(name[0]);
 	free(name[1]);
 	free(name);
-	if (a == -1 || b == -1)
+	if (a == ft_nbroom(rm) || b == ft_nbroom(rm))
 		return (0);
-	if (matrix[a][b] == -1)
+	if (matrix[a][b] == -1 && a != b)
 	{
 		matrix[a][a] += 1;
 		matrix[b][b] += 1;

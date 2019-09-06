@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 14:27:20 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 13:49:27 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_way	*ft_newway(t_way *way, int **lane)
 	t_way	*ret;
 	t_way	*new;
 
+	if (!lane)
+		return (NULL);
 	if (!(new = (t_way*)malloc(sizeof(t_way))))
 		return (NULL);
 	new->lane = lane;
@@ -57,6 +59,43 @@ static t_path	*ft_newpath(t_path *paths, t_way *way)
 	return (ret);
 }
 
+int				ft_test(int *start)
+{
+	int		i;
+
+	i = 0;
+	while (start[i] != -1)
+		i++;
+	return (i - 1);
+}
+
+t_path			*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
+{
+	t_algo	*al;
+
+	al = ft_initalgo(matrix, rm);
+	al->i = -1;
+	while (al->start[++al->i] >= 0)
+	{
+		al->way = NULL;
+		al->cflct = ft_initcflct(rm, matrix);
+		al->j = al->i;
+		while (1)
+		{
+			if ((al->lane = ft_bfs(al->start[al->j--], matrix, al->cflct, rm)))
+				al->way = ft_newway(al->way, al->lane);
+			al->j == -1 ? al->j = ft_test(al->start) : 1;
+			if (al->j == al->i)
+				break ;
+		}
+		free(al->cflct);
+		paths = ft_newpath(paths, al->way);
+	}
+	free(al->start);
+	free(al);
+	return (paths);
+}
+
 t_path			*ft_getpaths(t_rm *rm, int **matrix)
 {
 	t_algo	*al;
@@ -83,5 +122,5 @@ t_path			*ft_getpaths(t_rm *rm, int **matrix)
 	}
 	free(al->start);
 	free(al);
-	return (paths);
+	return (ft_getpaths2(rm, matrix, paths));
 }

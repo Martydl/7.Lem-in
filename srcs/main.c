@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 15:55:28 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 14:52:25 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		main(void)
 	rd = ft_read();
 	if (!rd)
 		ft_error(NULL, NULL, NULL);
-	ft_display_rd(rd);
+	//ft_display_rd(rd);
 	ants = ft_getants(&rd);
 	rm = ft_getroom(&rd, 0, 0);
 	rm = ft_push_front(rm, 1, rd);
@@ -73,6 +73,7 @@ int		main(void)
 	if (!rm_check(rm, rd))
 		ft_error(rd, rm, NULL);
 	matrix = ft_matrix(&rd, rm);
+	//ft_display_matrix(matrix, rm);
 	paths = ft_getpaths(rm, matrix);
 	if (!paths)
 		ft_error(NULL, rm, matrix);

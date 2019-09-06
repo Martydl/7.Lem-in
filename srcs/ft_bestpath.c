@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 14:22:44 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/06 14:06:00 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static void	ft_sortways(t_way *way)
+static void	ft_sortway(t_way *way)
 {
 	t_way	*beg;
 	int		**tmp;
@@ -39,7 +39,7 @@ static void	ft_fillway(t_way *way, int ants)
 {
 	t_way	*beg;
 
-	ft_sortways(way);
+	ft_sortway(way);
 	beg = way;
 	while (ants)
 	{
