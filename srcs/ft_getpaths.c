@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 15:23:34 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 11:18:09 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_path	*ft_newpath(t_path *paths, t_way *way)
 	return (ret);
 }
 
-int				ft_test(int *start)
+static int		ft_end(int *start)
 {
 	int		i;
 
@@ -69,7 +69,7 @@ int				ft_test(int *start)
 	return (i - 1);
 }
 
-t_path			*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
+static t_path	*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
 {
 	t_algo	*al;
 
@@ -84,7 +84,7 @@ t_path			*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
 		{
 			if ((al->lane = ft_bfs(al->start[al->j--], matrix, al->cflct, rm)))
 				al->way = ft_newway(al->way, al->lane);
-			al->j == -1 ? al->j = ft_test(al->start) : 1;
+			al->j == -1 ? al->j = ft_end(al->start) : 1;
 			if (al->j == al->i)
 				break ;
 		}

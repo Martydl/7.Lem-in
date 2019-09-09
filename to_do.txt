@@ -1,9 +1,6 @@
-- perhaps a real main ?
-
 - ALGO
 	- opti start / end (time)
-	- opti move on big
 
-- opti paths choosing
+startisend
 
-- unknown room
+bonus : matrix, no aff, paths (final w/ ants);

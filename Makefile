@@ -2,17 +2,16 @@ NAME = lem-in
 
 # Sources
 
-SRCS_NAME =	main.c \
+SRCS_NAME =	lem_in.c \
 			ft_read.c \
 			ft_room.c \
 			ft_matrix.c \
-			ft_display_matrix.c \
 			ft_bfs.c \
 			ft_getpaths.c \
 			ft_bestpath.c \
 			ft_doit.c \
+			ft_display.c \
 			ft_free.c \
-			ft_error.c \
 			tools_bfs.c \
 			tools_is.c \
 			tools_path.c \

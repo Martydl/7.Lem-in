@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_display_matrix.c                                :+:      :+:    :+:   */
+/*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:46:51 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/08/21 19:42:46 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 11:36:53 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
+
+void		ft_display_rd(t_rd *rd)
+{
+	while (rd)
+	{
+		ft_putendl(rd->data);
+		rd = rd->next;
+	}
+	ft_putchar('\n');
+}
 
 static void	ft_display_name(t_rm **room, int format)
 {
@@ -61,4 +71,27 @@ void		ft_display_matrix(int **matrix, t_rm *room)
 				ft_printf("%5d", matrix[i][j]);
 	}
 	ft_putstr("\n\n");
+}
+
+void		ft_display_path(t_path *path)
+{
+	int		i;
+	t_way	*beg;
+
+	while (path)
+	{
+		beg = path->way;
+		while (path->way)
+		{
+			ft_printf("%1k%5d%0k", path->way->ants);
+			i = -1;
+			while (path->way->lane[0][++i] != -1)
+				ft_printf("%10d", path->way->lane[0][i]);
+			ft_putchar('\n');
+			path->way = path->way->next;
+		}
+		ft_putchar('\n');
+		path->way = beg;
+		path = path->next;
+	}
 }

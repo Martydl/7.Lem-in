@@ -6,13 +6,13 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 16:40:21 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 16:43:24 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 11:36:31 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-char	**ft_initroom(t_rm *rm)
+static char	**ft_initroom(t_rm *rm)
 {
 	char	**room;
 	int		nbroom;
@@ -30,7 +30,7 @@ char	**ft_initroom(t_rm *rm)
 	return (room);
 }
 
-void	ft_free_room(char **room, t_rm *rm)
+static void	ft_free_room(char **room, t_rm *rm)
 {
 	int		nbroom;
 	int		i;
@@ -42,46 +42,42 @@ void	ft_free_room(char **room, t_rm *rm)
 	free(room);
 }
 
-void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
+static int	ft_printmove(int **lane, char **room, int space, int i)
+{
+	if (space == 0 && (space = 1))
+		ft_printf("L%d-%s", lane[1][i], room[lane[0][i]]);
+	else
+		ft_printf(" L%d-%s", lane[1][i], room[lane[0][i]]);
+	return (space);
+}
+
+static void	ft_moveants(t_way *way, char **room, t_doit *doit, int space)
 {
 	int		i;
 
-	(void)room;
-	(void)space;
 	while (way)
 	{
 		i = way->length;
 		while (--i > 0)
-		{
 			if (way->lane[1][i - 1])
 			{
 				way->lane[1][i] = way->lane[1][i - 1];
 				way->lane[1][i - 1] = 0;
-				if (space == 0 && (space = 1))
-					ft_printf("L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
-				else
-					ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
-				if (i == way->length - 1)
-					doit->end++;
+				space = ft_printmove(way->lane, room, space, i);
+				i == way->length - 1 ? doit->end++ : 0;
 			}
-		}
 		if (way->ants)
 		{
-			way->lane[1][0] = doit->ants;
+			way->lane[1][0] = doit->ants++;
 			way->ants--;
-			doit->ants++;
-			if (space == 0 && (space = 1))
-				ft_printf("L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
-			else
-				ft_printf(" L%d-%s", way->lane[1][i], room[way->lane[0][i]]);
-			if (i == way->length - 1)
-				doit->end++;
+			space = ft_printmove(way->lane, room, space, i);
+			i == way->length - 1 ? doit->end++ : 0;
 		}
 		way = way->next;
 	}
 }
 
-void	ft_doit(t_way *way, t_rm *rm, int ants)
+void		ft_doit(t_way *way, t_rm *rm, int ants)
 {
 	t_doit	*doit;
 	char	**room;
