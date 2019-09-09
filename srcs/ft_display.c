@@ -6,32 +6,27 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:46:51 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 15:35:45 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:55:20 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_dsp		*ft_initdsp(int ac, char **av)
+t_dsp		*ft_args(int ac, char **av)
 {
 	t_dsp *dsp;
 
+	if (ac > 2)
+		ft_usage(NULL);
 	if (!(dsp = (t_dsp*)malloc(sizeof(t_dsp))))
 		ft_error(NULL, NULL, NULL, NULL);
-	if (ac >= 2 && av[1][0] == '-')
-	{
-		dsp->rd = ft_strchr(av[1], '1') ? 0 : 1;
-		dsp->move = ft_strchr(av[1], '2') ? 0 : 1;
-		dsp->matrix = ft_strchr(av[1], '3') ? 1 : 0;
-		dsp->way = ft_strchr(av[1], '4') ? 1 : 0;
-	}
-	else
-	{
-		dsp->rd = 1;
-		dsp->move = 1;
-		dsp->matrix = 0;
-		dsp->way = 0;
-	}
+	dsp->rd = 1;
+	dsp->move = 1;
+	dsp->matrix = 0;
+	dsp->way = 0;
+	dsp->space = 0;
+	if (ac == 2)
+		ft_parseargs(dsp, av[1]);
 	return (dsp);
 }
 

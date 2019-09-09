@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 15:36:09 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:12:53 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main(int ac, char **av)
 	t_path	*paths;
 	t_dsp	*dsp;
 
-	dsp = ft_initdsp(ac, av);
+	dsp = ft_args(ac, av);
 	if (!(rd = ft_read()))
 		ft_error(NULL, NULL, NULL, dsp);
 	dsp->rd ? ft_display_rd(rd) : 0;

@@ -15,7 +15,8 @@ SRCS_NAME =	lem_in.c \
 			tools_bfs.c \
 			tools_is.c \
 			tools_path.c \
-			tools_lst.c
+			tools_lst.c \
+			tools_other.c
 
 INCS_NAME	=	lem_in.h
 
