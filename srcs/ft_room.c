@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:00:28 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 11:53:16 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:40:54 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static int		ft_checkpos(t_rd **rd, int start, int end)
 {
@@ -70,7 +70,7 @@ t_rm			*ft_getroom(t_rd **rd, int start, int end)
 	return (rm);
 }
 
-static t_rm		*ft_push_front(t_rm *rm, int pos, t_rd *rd)
+static t_rm		*ft_push_front(t_rm *rm, int pos, t_rd *rd, t_dsp *dsp)
 {
 	t_rm *beg;
 	t_rm *tmp;
@@ -85,35 +85,37 @@ static t_rm		*ft_push_front(t_rm *rm, int pos, t_rd *rd)
 			rm = rm->next;
 		}
 		if (!rm)
-			ft_error(rd, beg, NULL);
+			ft_error(rd, beg, NULL, dsp);
 		tmp->next = rm->next;
 		rm->next = beg;
 	}
+	if (pos == 1)
+		rm = ft_push_front(rm, -1, rd, dsp);
 	return (rm);
 }
 
-t_rm			*rm_check(t_rm *rm, t_rd *rd)
+t_rm			*rm_check(t_rm *rm, t_rd *rd, t_dsp *dsp)
 {
 	t_rm *beg;
 	t_rm *ret;
 
-	rm = ft_push_front(rm, 1, rd);
-	rm = ft_push_front(rm, -1, rd);
+	rm = ft_push_front(rm, 1, rd, dsp);
 	ret = rm;
 	while (rd && rd_iscom(rd->data))
 	{
-		rd_isstart(rd->data) || rd_isend(rd->data) ? ft_error(rd, rm, NULL) : 0;
+		if (rd_isstart(rd->data) || rd_isend(rd->data))
+			ft_error(rd, rm, NULL, dsp);
 		rd = rd->next;
 	}
-	if (!rd || !rd_ispipe(rd->data))
-		ft_error(rd, rm, NULL);
+	(!rd || !rd_ispipe(rd->data)) ? ft_error(rd, rm, NULL, dsp) : 0;
 	beg = rm;
 	while (beg)
 	{
 		rm = beg->next;
 		while (rm)
 		{
-			!ft_strcmp(beg->data[0], rm->data[0]) ? ft_error(rd, rm, NULL) : 0;
+			if (!ft_strcmp(beg->data[0], rm->data[0]))
+				ft_error(rd, rm, NULL, dsp);
 			rm = rm->next;
 		}
 		beg = beg->next;

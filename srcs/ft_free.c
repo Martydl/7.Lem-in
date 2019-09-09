@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:39:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 11:22:43 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:38:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void		ft_free_rd(t_rd *beg)
 {
@@ -49,7 +49,7 @@ static void	ft_free_matrix(int **matrix, t_rm *rm)
 	free(matrix);
 }
 
-static void	ft_free_paths(t_path *paths)
+void		ft_free_paths(t_path *paths)
 {
 	t_path	*tmp;
 	t_way	*tmp2;

@@ -17,7 +17,7 @@ SRCS_NAME =	lem_in.c \
 			tools_path.c \
 			tools_lst.c
 
-INCS_NAME	=	lem-in.h
+INCS_NAME	=	lem_in.h
 
 LIB_NAME	=	libft.a
 
@@ -60,6 +60,7 @@ librm:
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@make -C libft clean
 
 fclean: librm clean
 	@rm -f $(NAME)

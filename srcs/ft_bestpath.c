@@ -6,13 +6,33 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:24 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 10:34:40 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:30:44 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-static void	ft_sortway(t_way *way)
+static t_path	*ft_startisend(t_path *paths, int ants)
+{
+	t_path *ret;
+
+	if (ft_lanelen(paths->way->lane[0]) == 1)
+	{
+		ret = paths;
+		paths = paths->next;
+	}
+	else
+	{
+		ret = paths->next;
+		paths->next = paths->next->next;
+	}
+	ft_free_paths(paths);
+	ret->way->ants = ants;
+	ret->next = NULL;
+	return (ret);
+}
+
+static void		ft_sortway(t_way *way)
 {
 	t_way	*beg;
 	int		**tmp;
@@ -35,7 +55,7 @@ static void	ft_sortway(t_way *way)
 	}
 }
 
-static void	ft_fillway(t_way *way, int ants)
+static void		ft_fillway(t_way *way, int ants)
 {
 	t_way	*beg;
 	int		last;
@@ -64,7 +84,7 @@ static void	ft_fillway(t_way *way, int ants)
 	}
 }
 
-static void	ft_delpath(t_path *path)
+static void		ft_delpath(t_path *path)
 {
 	t_way	*tmp;
 
@@ -80,14 +100,18 @@ static void	ft_delpath(t_path *path)
 	free(path);
 }
 
-t_path		*ft_bestpath(t_path *paths, int ants)
+t_path			*ft_bestpath(t_path *paths, int ants)
 {
 	t_path	*tmp;
 
 	ft_fillway(paths->way, ants);
+	if (ft_lanelen(paths->way->lane[0]) == 1)
+		return (ft_startisend(paths, ants));
 	while (paths->next)
 	{
 		ft_fillway(paths->next->way, ants);
+		if (ft_lanelen(paths->next->way->lane[0]) == 1)
+			return (ft_startisend(paths, ants));
 		if ((long)paths->way->ants + (long)paths->way->length
 			> (long)paths->next->way->ants + (long)paths->next->way->length)
 		{

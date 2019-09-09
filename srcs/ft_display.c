@@ -6,11 +6,34 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:46:51 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 11:36:53 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:35:45 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
+
+t_dsp		*ft_initdsp(int ac, char **av)
+{
+	t_dsp *dsp;
+
+	if (!(dsp = (t_dsp*)malloc(sizeof(t_dsp))))
+		ft_error(NULL, NULL, NULL, NULL);
+	if (ac >= 2 && av[1][0] == '-')
+	{
+		dsp->rd = ft_strchr(av[1], '1') ? 0 : 1;
+		dsp->move = ft_strchr(av[1], '2') ? 0 : 1;
+		dsp->matrix = ft_strchr(av[1], '3') ? 1 : 0;
+		dsp->way = ft_strchr(av[1], '4') ? 1 : 0;
+	}
+	else
+	{
+		dsp->rd = 1;
+		dsp->move = 1;
+		dsp->matrix = 0;
+		dsp->way = 0;
+	}
+	return (dsp);
+}
 
 void		ft_display_rd(t_rd *rd)
 {
@@ -73,25 +96,18 @@ void		ft_display_matrix(int **matrix, t_rm *room)
 	ft_putstr("\n\n");
 }
 
-void		ft_display_path(t_path *path)
+void		ft_display_way(t_way *way)
 {
 	int		i;
-	t_way	*beg;
 
-	while (path)
+	while (way)
 	{
-		beg = path->way;
-		while (path->way)
-		{
-			ft_printf("%1k%5d%0k", path->way->ants);
-			i = -1;
-			while (path->way->lane[0][++i] != -1)
-				ft_printf("%10d", path->way->lane[0][i]);
-			ft_putchar('\n');
-			path->way = path->way->next;
-		}
-		ft_putchar('\n');
-		path->way = beg;
-		path = path->next;
+		ft_printf("%1k%5d%0k", way->ants);
+		i = -1;
+		while (way->lane[0][++i] != -1)
+			ft_printf("%10d", way->lane[0][i]);
+		ft_putendl("");
+		way = way->next;
 	}
+	ft_putendl("");
 }

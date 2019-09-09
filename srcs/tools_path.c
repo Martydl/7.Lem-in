@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:28:01 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 16:43:06 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:35:46 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		ft_lanelen(int *lane)
 {
@@ -48,7 +48,7 @@ int		*ft_getstart(int **matrix, t_rm *rm)
 	return (ret);
 }
 
-int		*ft_initcflct(t_rm *rm, int **matrix)
+int		*ft_initcflct(t_rm *rm, int **matrix, t_dsp *dsp)
 {
 	int		*cflct;
 	int		nbroom;
@@ -56,19 +56,19 @@ int		*ft_initcflct(t_rm *rm, int **matrix)
 
 	nbroom = ft_nbroom(rm);
 	if (!(cflct = (int*)malloc(sizeof(int) * nbroom)))
-		ft_error(NULL, rm, matrix);
+		ft_error(NULL, rm, matrix, dsp);
 	i = -1;
 	while (++i < nbroom)
 		cflct[i] = -1;
 	return (cflct);
 }
 
-t_algo	*ft_initalgo(int **matrix, t_rm *rm)
+t_algo	*ft_initalgo(int **matrix, t_rm *rm, t_dsp *dsp)
 {
 	t_algo	*al;
 
 	if (!(al = (t_algo*)malloc(sizeof(t_algo))))
-		ft_error(NULL, rm, matrix);
+		ft_error(NULL, rm, matrix, dsp);
 	al->start = ft_getstart(matrix, rm);
 	return (al);
 }

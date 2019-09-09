@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 16:20:17 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/05 14:18:56 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:38:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		rd_isstart(char *str)
 {

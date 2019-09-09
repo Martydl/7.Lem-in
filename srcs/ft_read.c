@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 11:02:32 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:05:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_rd	*ft_read(void)
 {
@@ -37,19 +37,19 @@ int		ft_getants(t_rd **rd)
 	while ((*rd))
 	{
 		if (rd_isstart((*rd)->data) || rd_isend((*rd)->data))
-			ft_error(*rd, NULL, NULL);
+			ft_error(*rd, NULL, NULL, NULL);
 		else if (rd_iscom((*rd)->data))
 			ft_next(rd);
 		else if (ft_isint((*rd)->data))
 		{
 			ants = ft_atoi((*rd)->data);
 			if (ants <= 0)
-				ft_error(*rd, NULL, NULL);
+				ft_error(*rd, NULL, NULL, NULL);
 			ft_next(rd);
 			return (ants);
 		}
 		else
-			ft_error(*rd, NULL, NULL);
+			ft_error(*rd, NULL, NULL, NULL);
 	}
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:22 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 11:18:09 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:35:45 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static t_way	*ft_newway(t_way *way, int **lane)
 {
@@ -69,16 +69,16 @@ static int		ft_end(int *start)
 	return (i - 1);
 }
 
-static t_path	*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
+static t_path	*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths, t_dsp *dsp)
 {
 	t_algo	*al;
 
-	al = ft_initalgo(matrix, rm);
+	al = ft_initalgo(matrix, rm, dsp);
 	al->i = -1;
 	while (al->start[++al->i] >= 0)
 	{
 		al->way = NULL;
-		al->cflct = ft_initcflct(rm, matrix);
+		al->cflct = ft_initcflct(rm, matrix, dsp);
 		al->j = al->i;
 		while (1)
 		{
@@ -96,18 +96,18 @@ static t_path	*ft_getpaths2(t_rm *rm, int **matrix, t_path *paths)
 	return (paths);
 }
 
-t_path			*ft_getpaths(t_rm *rm, int **matrix)
+t_path			*ft_getpaths(t_rm *rm, int **matrix, t_dsp *dsp)
 {
 	t_algo	*al;
 	t_path	*paths;
 
 	paths = NULL;
-	al = ft_initalgo(matrix, rm);
+	al = ft_initalgo(matrix, rm, dsp);
 	al->i = -1;
 	while (al->start[++al->i] >= 0)
 	{
 		al->way = NULL;
-		al->cflct = ft_initcflct(rm, matrix);
+		al->cflct = ft_initcflct(rm, matrix, dsp);
 		al->j = al->i;
 		while (1)
 		{
@@ -122,5 +122,5 @@ t_path			*ft_getpaths(t_rm *rm, int **matrix)
 	}
 	free(al->start);
 	free(al);
-	return (ft_getpaths2(rm, matrix, paths));
+	return (ft_getpaths2(rm, matrix, paths, dsp));
 }

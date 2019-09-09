@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:03:15 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 14:06:48 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:38:51 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	ft_next(t_rd **rd)
 {
@@ -46,4 +46,16 @@ int		ft_getpos(t_rm *rm, char *name)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_free_room(char **room, t_rm *rm)
+{
+	int		nbroom;
+	int		i;
+
+	nbroom = ft_nbroom(rm);
+	i = -1;
+	while (++i < nbroom)
+		free(room[i]);
+	free(room);
 }

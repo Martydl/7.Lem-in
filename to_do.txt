@@ -1,8 +1,2 @@
 - ALGO
 	- opti start / end (time)
-
-startisend
-
-bonus : matrix, no aff, paths (final w/ ants);
-
-simple 2 ?

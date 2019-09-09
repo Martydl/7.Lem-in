@@ -6,11 +6,11 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 13:56:19 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/06 14:29:35 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:35:46 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static int	**ft_initmatrix(t_rm *room)
 {
@@ -39,14 +39,14 @@ static int	**ft_initmatrix(t_rm *room)
 	return (matrix);
 }
 
-static int	ft_fill(int **matrix, t_rd *rd, t_rm *rm)
+static int	ft_fill(int **matrix, t_rd *rd, t_rm *rm, t_dsp *dsp)
 {
 	char	**name;
 	int		a;
 	int		b;
 
 	if (!(name = ft_strsplit(rd->data, '-')))
-		ft_error(rd, rm, matrix);
+		ft_error(rd, rm, matrix, dsp);
 	a = ft_getpos(rm, name[0]);
 	b = ft_getpos(rm, name[1]);
 	free(name[0]);
@@ -81,17 +81,17 @@ static void	ft_optimatrix(int **matrix, t_rm *rm)
 	}
 }
 
-int			**ft_matrix(t_rd **rd, t_rm *rm)
+int			**ft_matrix(t_rd **rd, t_rm *rm, t_dsp *dsp)
 {
 	int		**matrix;
 
 	if (!(matrix = ft_initmatrix(rm)))
-		ft_error(*rd, rm, matrix);
+		ft_error(*rd, rm, matrix, dsp);
 	while (*rd)
 	{
 		if (rd_ispipe((*rd)->data))
 		{
-			if (!ft_fill(matrix, *rd, rm))
+			if (!ft_fill(matrix, *rd, rm, dsp))
 				break ;
 			ft_next(rd);
 		}
@@ -101,6 +101,8 @@ int			**ft_matrix(t_rd **rd, t_rm *rm)
 			break ;
 	}
 	ft_optimatrix(matrix, rm);
+	if (dsp->matrix)
+		ft_display_matrix(matrix, rm);
 	ft_free_rd(*rd);
 	return (matrix);
 }
