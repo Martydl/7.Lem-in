@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:08:44 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 16:55:33 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:24:20 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				rd_isend(char *str);
 int				rd_iscom(char *str);
 int				rd_isroom(char *str);
 int				rd_ispipe(char *str);
+int				ft_check_dup(t_rm *rm);
 t_bfs			*ft_setbfs(t_rm *rm, int start);
 int				**ft_initlane(int i);
 void			*ft_freebfs(t_bfs *bfs);

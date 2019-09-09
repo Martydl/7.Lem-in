@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:11:04 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 16:55:09 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:24:44 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ void	ft_parseargs(t_dsp *dsp, char *args)
 		else
 			ft_usage(dsp);
 	}
+}
+
+int		ft_check_dup(t_rm *rm)
+{
+	t_rm	*beg;
+
+	beg = rm;
+	while (beg)
+	{
+		rm = beg->next;
+		while (rm)
+		{
+			if (!ft_strcmp(beg->data[0], rm->data[0])
+				|| (!ft_strcmp(beg->data[1], rm->data[1])
+					&& !ft_strcmp(beg->data[2], rm->data[2])))
+				return (0);
+			rm = rm->next;
+		}
+		beg = beg->next;
+	}
+	return (1);
 }
 
 void	ft_free_room(char **room, t_rm *rm)

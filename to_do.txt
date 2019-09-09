@@ -1,2 +1,4 @@
-- ALGO
-	- opti start / end (time)
+- Algo
+	- time opti ? :/
+
+- Visu

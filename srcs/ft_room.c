@@ -6,7 +6,7 @@
 /*   By: mde-laga <mde-laga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 14:00:28 by mde-laga          #+#    #+#             */
-/*   Updated: 2019/09/09 15:40:54 by mde-laga         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:23:41 by mde-laga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static t_rm		*ft_push_front(t_rm *rm, int pos, t_rd *rd, t_dsp *dsp)
 
 t_rm			*rm_check(t_rm *rm, t_rd *rd, t_dsp *dsp)
 {
-	t_rm *beg;
 	t_rm *ret;
 
 	rm = ft_push_front(rm, 1, rd, dsp);
@@ -108,17 +107,7 @@ t_rm			*rm_check(t_rm *rm, t_rd *rd, t_dsp *dsp)
 		rd = rd->next;
 	}
 	(!rd || !rd_ispipe(rd->data)) ? ft_error(rd, rm, NULL, dsp) : 0;
-	beg = rm;
-	while (beg)
-	{
-		rm = beg->next;
-		while (rm)
-		{
-			if (!ft_strcmp(beg->data[0], rm->data[0]))
-				ft_error(rd, rm, NULL, dsp);
-			rm = rm->next;
-		}
-		beg = beg->next;
-	}
+	if (!ft_check_dup(rm))
+		ft_error(rd, rm, NULL, dsp);
 	return (ret);
 }
