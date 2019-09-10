@@ -1,0 +1,91 @@
+NAME = lem-in
+VISU = visu
+
+# Sources
+
+SRCS_NAME =	lem_in.c \
+			ft_read.c \
+			ft_room.c \
+			ft_matrix.c \
+			ft_bfs.c \
+			ft_getpaths.c \
+			ft_bestpath.c \
+			ft_doit.c \
+			ft_display.c \
+			ft_free.c \
+			tools_bfs.c \
+			tools_is.c \
+			tools_path.c \
+			tools_lst.c \
+			tools_other.c
+
+VISU_SRCS_NAME =	visu.c
+
+INCS_NAME	=	lem_in.h
+
+LIB_NAME	=	libft.a
+
+# Directories
+
+SRCS_DIR	=	./srcs/
+VISU_SRCS_DIR = ./visu_srcs/
+OBJS_DIR	=	./objs/
+VISU_OBJS_DIR = ./visu_objs/
+INCS_DIR	=	./includes/
+LIB_DIR		=	./libft/
+
+# Files
+
+SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_NAME))
+VISU_SRCS	=	$(addprefix $(VISU_SRCS_DIR), $(VISU_SRCS_NAME))
+OBJS		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
+VISU_OBJS	=	$(patsubst $(VISU_SRCS_DIR)%.c, $(VISU_OBJS_DIR)%.o, $(VISU_SRCS))
+INCS		=	$(addprefix $(INCS_DIR), $(INCS_NAME))
+LIB			=	$(addprefix $(LIB_DIR), $(LIB_NAME))
+
+# Compilation
+
+CC			=	gcc
+CPPFLAGS	=	-I $(INCS_DIR)
+LIBH		=	-I $(LIB_DIR)includes/
+CFLAGS		=	-Wall -Wextra -Werror -g $(CPPFLAGS) $(LIBH) -c `sdl2-config --cflags`
+LFLAGS		=	`sdl2-config --libs`
+
+all: $(NAME) $(VISU)
+
+$(LIB):
+	@make -j -sC $(LIB_DIR)
+
+$(NAME): $(LIB) $(OBJS)
+	@$(CC) $(OBJS) $(LIB) -o $(NAME)
+	@echo Lem-in OK
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INCS)
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
+$(VISU): $(LIB) $(VISU_OBJS)
+	@$(CC) $(VISU_OBJS) $(LIB) -o $(VISU) $(LFLAGS)
+	@echo Visu OK
+
+$(VISU_OBJS_DIR)%.o: $(VISU_SRCS_DIR)%.c
+	@mkdir -p $(VISU_OBJS_DIR)
+	@$(CC) $(CFLAGS) -o $@ $^
+
+librm:
+	@make -sC libft fclean
+
+clean:
+	@rm -rf $(OBJS_DIR)
+	@rm -rf $(VISU_OBJS_DIR)
+	@make -C libft clean
+
+fclean: librm clean
+	@rm -f $(NAME)
+	@rm -f $(VISU)
+	@echo Lem-in fclean OK
+	@echo Visu fclean OK
+
+re: fclean all
+
+.PHONY: all librm clean fclean re
